@@ -73,17 +73,16 @@ __attribute((weak, alias("DefaultIRQHandler"))) __attribute__((used));
 void TIM2_IRQHandler(void) __attribute__((section(".text.vector_handler")))
 __attribute((weak, alias("DefaultIRQHandler"))) __attribute__((used));
 
-void InterruptVector() __attribute__((naked)) __attribute((section(".init")))
-__attribute((weak, alias("InterruptVectorDefault")));
-void InterruptVectorDefault() __attribute__((naked))
-__attribute((section(".init")));
+void IVT() __attribute__((naked)) __attribute((section(".init")))
+__attribute((weak, alias("DefaultIVT")));
+void DefaultIVT() __attribute__((naked)) __attribute((section(".init")));
 
 void DefaultIRQHandler(void) {
   // Infinite Loop
   asm volatile("1: j 1b");
 }
 
-void InterruptVectorDefault() {
+void DefaultIVT() {
   asm volatile("\n\
 	.align  2\n\
 	.option   push;\n\
@@ -149,7 +148,7 @@ void handle_reset() {
                "	li a0, 0x80\n\
 	csrw mstatus, a0\n\
 	li a3, 0x3\n\
-	la a0, InterruptVector\n\
+	la a0, IVT\n\
 	or a0, a0, a3\n\
 	csrw mtvec, a0\n"
                :

@@ -1,4 +1,4 @@
-ENTRY ( InterruptVector )
+ENTRY ( IVT )
 
 MEMORY {
   FLASH (rx) : ORIGIN = 0x00000000, LENGTH = 16K
@@ -8,10 +8,10 @@ MEMORY {
 SECTIONS {
 
   .init : {
-    _start_init = .;
+    _sinit = .;
     KEEP(*(SORT_NONE(.init)))
     . = ALIGN(4);
-    _end_init = .;
+    _einit = .;
   } >FLASH AT>FLASH
 
   .text : {

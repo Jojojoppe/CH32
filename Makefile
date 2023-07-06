@@ -1,6 +1,7 @@
 .SILENT:
-DEVICE 				?= ch32v003
-DEBUG					:=
+DEVICE 				?= ch32v203
+PART					?= g6
+DEBUG					?=
 BUILDDIR_BASE	:= $(PWD)/build
 DISTDIR_BASE	:= $(PWD)/dist
 
@@ -13,14 +14,21 @@ else
 	DISTDIR			:= $(DISTDIR_BASE)/debug
 endif
 
-.PHONY: all clean
+.PHONY: all clean flash flash_bootloader
 
 all: test_application
 
 clean:
-	echo 'CLEAN'
+	echo ' >> clean'
 	-rm -rf $(BUILDDIR_BASE)
 
 DIR = test_application
 include $(DIR)/Makefile
 
+flash:
+	echo ' >> flash'
+	-extern/ch32v003fun/minichlink/minichlink -w $(DISTDIR)/last.bin flash -b
+
+flash_bootloader:
+	echo ' >> flash_bootloader'
+	-extern/ch32v003fun/minichlink/minichlink -w $(DISTDIR)/last.bin flash -b

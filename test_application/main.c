@@ -2,24 +2,6 @@
 
 int main() {
 
-#ifdef CH32V003
-  // // Default use pll
-  // uint32_t *rcc_cltr = (uint32_t*)0x40021000;
-  // uint32_t *rcc_cfgr0 = (uint32_t*)0x40021004;
-  // uint32_t *rcc_intr = (uint32_t*)0x40021008;
-  // *rcc_cfgr0 = 0x00000000;
-  // *rcc_cltr = 0x01000000 | (0x10<<3);
-  // // // Set flash latency
-  // uint32_t *flash_actlr = (uint32_t*)0x40022000;
-  // *flash_actlr = 1U;
-  // *rcc_intr = 0x009f0000;
-  // while((*rcc_cltr&0x02000000)==0U);
-  // *rcc_cfgr0 = 0x00000002;
-  // while((*rcc_cfgr0&0x0000000c)!=0x08);
-#endif
-  // #ifdef CH32V203
-  // #endif
-
   // Enable APB2 clocks for gpio B and D
   uint32_t *rcc_apb2pcenr = (uint32_t *)0x40021018;
   *rcc_apb2pcenr |= 0x28;

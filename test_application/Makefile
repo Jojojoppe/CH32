@@ -14,10 +14,9 @@ LD						:= $(PREFIX)-gcc
 AS						:= $(PREFIX)-gcc
 OBJCOPY 			:= $(PREFIX)-objcopy
 OBJDUMP 			:= $(PREFIX)-objdump
-SIZE     			:= $(PREFIX)-size
 
 CFLAGS				+= -I.
-LDFLAGS				+= -T device/$(DEVICE)/linker.ld -lgcc
+LDFLAGS				+= -Wl,--print-memory-usage
 
 # Add DEPFILE dependencies
 -include $(DEPFILES)
@@ -30,11 +29,11 @@ $(DISTLOC)/$(TARGET).elf: $(OBJFILES)
 	echo $(SRCNAMES)
 	-mkdir -p $(shell dirname $@)
 	$(LD) $(CFLAGS) $(LDFLAGS) -o $@ $(OBJFILES) $(CC_LIBS)
-	$(SIZE) $@
 	$(OBJDUMP) -S $@ > $@.lst
 	$(OBJDUMP) -t $@ > $@.map
 	$(OBJCOPY) -O binary $@ $@.bin
 	$(OBJCOPY) -O ihex $@ $@.hex
+	cp $@.bin $(DISTDIR)/last.bin
 
 $(OBJFILES): $(BUILDLOC)/%.c.o: %.c
 	echo 'CC ' $@

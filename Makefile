@@ -1,6 +1,6 @@
 .SILENT:
-DEVICE 				:= ch32v003
-DEBUG					:= 1
+DEVICE 				?= ch32v003
+DEBUG					:=
 BUILDDIR_BASE	:= $(PWD)/build
 DISTDIR_BASE	:= $(PWD)/dist
 

@@ -10,37 +10,37 @@ int main() __attribute__((used));
 void _DefaultIRQ_Handler(void) __attribute__((section(".text.vector_handler")));
 void _DefaultIRQ_Handler(void) { asm volatile("1: j 1b"); }
 #define DEFINTERRUPT(x)                                                        \
-  void x(void) __attribute__((section(".text.vector_handler")))                \
+  void _##x##_Handler(void) __attribute__((section(".text.vector_handler")))       \
   __attribute__((weak, alias("_DefaultIRQ_Handler"))) __attribute__((used))
 
 // All interrupt handlers point to the default IRQ handler
-DEFINTERRUPT(_NMI_Handler);
-DEFINTERRUPT(_HardFault_Handler);
-DEFINTERRUPT(_SysTick_Handler);
-DEFINTERRUPT(_SW_Handler);
-DEFINTERRUPT(_WWDG_Handler);
-DEFINTERRUPT(_PVD_Handler);
-DEFINTERRUPT(_FLASH_Handler);
-DEFINTERRUPT(_RCC_Handler);
-DEFINTERRUPT(_EXTI7_0_Handler);
-DEFINTERRUPT(_AWU_Handler);
-DEFINTERRUPT(_DMA1_CH1_Handler);
-DEFINTERRUPT(_DMA1_CH2_Handler);
-DEFINTERRUPT(_DMA1_CH3_Handler);
-DEFINTERRUPT(_DMA1_CH4_Handler);
-DEFINTERRUPT(_DMA1_CH5_Handler);
-DEFINTERRUPT(_DMA1_CH6_Handler);
-DEFINTERRUPT(_DMA1_CH7_Handler);
-DEFINTERRUPT(_ADC_Handler);
-DEFINTERRUPT(_I2C1_EV_Handler);
-DEFINTERRUPT(_I2C1_ER_Handler);
-DEFINTERRUPT(_USART1_Handler);
-DEFINTERRUPT(_SPI1_Handler);
-DEFINTERRUPT(_TIM1BRK_Handler);
-DEFINTERRUPT(_TIM1UP_Handler);
-DEFINTERRUPT(_TIM1TRG_Handler);
-DEFINTERRUPT(_TIM1CC_Handler);
-DEFINTERRUPT(_TIM2_Handler);
+DEFINTERRUPT(NMI);
+DEFINTERRUPT(HardFault);
+DEFINTERRUPT(SysTick);
+DEFINTERRUPT(SW);
+DEFINTERRUPT(WWDG);
+DEFINTERRUPT(PVD);
+DEFINTERRUPT(FLASH);
+DEFINTERRUPT(RCC);
+DEFINTERRUPT(EXTI7_0);
+DEFINTERRUPT(AWU);
+DEFINTERRUPT(DMA1_CH1);
+DEFINTERRUPT(DMA1_CH2);
+DEFINTERRUPT(DMA1_CH3);
+DEFINTERRUPT(DMA1_CH4);
+DEFINTERRUPT(DMA1_CH5);
+DEFINTERRUPT(DMA1_CH6);
+DEFINTERRUPT(DMA1_CH7);
+DEFINTERRUPT(ADC);
+DEFINTERRUPT(I2C1_EV);
+DEFINTERRUPT(I2C1_ER);
+DEFINTERRUPT(USART1);
+DEFINTERRUPT(SPI1);
+DEFINTERRUPT(TIM1BRK);
+DEFINTERRUPT(TIM1UP);
+DEFINTERRUPT(TIM1TRG);
+DEFINTERRUPT(TIM1CC);
+DEFINTERRUPT(TIM2);
 
 void IVT() __attribute__((naked)) __attribute((section(".init")))
 __attribute((weak, alias("DefaultIVT")));
@@ -50,9 +50,7 @@ void DefaultIVT() {
 	.align  2\n\
 	.option   push;\n\
 	.option   norvc;\n\
-	j handle_reset\n");
-#if !defined(FUNCONF_TINYVECTOR) || !FUNCONF_TINYVECTOR
-  asm volatile("\n\
+	j handle_reset\n\
 	.word   0\n\
 	.word   _NMI_Handler\n\
 	.word   _HardFault_Handler\n\
@@ -91,9 +89,8 @@ void DefaultIVT() {
 	.word   _TIM1TRG_Handler\n\
 	.word   _TIM1CC_Handler\n\
 	.word   _TIM2_Handler\n\
+  .option   pop;\n\
 	");
-#endif
-  asm volatile(".option   pop;\n");
 }
 
 void handle_reset() {

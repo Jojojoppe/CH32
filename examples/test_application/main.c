@@ -11,9 +11,11 @@ int main() {
   RCC_INTR_bits.HSERDYC = 1;
   RCC_INTR_bits.HSIRDYC = 1;
   RCC_INTR_bits.LSIRDYC = 1;
+  // Wait for PLL to be locked
+  while(RCC_CLTR_bits.PLLRDY==0);
   // Use PLL as system clock
   RCC_CFGR0_bits.SW = 2;
-  // Wait for PLL to be locked
+  // Wait for PLL to be set to output
   while(RCC_CFGR0_bits.SWS!=2);
 
   // // Enable APB2 clocks for gpio B and D

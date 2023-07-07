@@ -1,10 +1,23 @@
+#include <ch32.h>
 #include <stdint.h>
 
 int main() {
+  // Use PLL
+  RCC_CFGR0 = 0;
+  RCC_CLTR_bits.PLLON = 1;
+  // Clear interupt ready flags
+  RCC_INTR_bits.CSSC = 1;
+  RCC_INTR_bits.PLLRDYC = 1;
+  RCC_INTR_bits.HSERDYC = 1;
+  RCC_INTR_bits.HSIRDYC = 1;
+  RCC_INTR_bits.LSIRDYC = 1;
+  // Use PLL as system clock
+  RCC_CFGR0_bits.SW = 2;
+  // Wait for PLL to be locked
+  while(RCC_CFGR0_bits.SWS!=2);
 
-  // Enable APB2 clocks for gpio B and D
-  uint32_t *rcc_apb2pcenr = (uint32_t *)0x40021018;
-  *rcc_apb2pcenr |= 0x28;
+  // // Enable APB2 clocks for gpio B and D
+  RCC_APB2PCENR_bits.IOPDEN = 1;
 
   uint32_t *gpiob_cfghr = (uint32_t *)0x40010c04;
   uint32_t *gpiob_bshr = (uint32_t *)0x40010c10;

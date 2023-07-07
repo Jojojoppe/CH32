@@ -1,4 +1,4 @@
-TARGET				:= test_application
+TARGET				:= blinky
 SRCFILES			+= main.c
 
 CH32ROOT 			:= ../..

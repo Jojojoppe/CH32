@@ -3,6 +3,7 @@
 DEVICE 				?= ch32v203
 PART					?= g6
 DEBUG					?=
+PREFIX					?= riscv64-elf
 
 include $(CH32ROOT)/device/$(DEVICE)/makefile.mk
 
@@ -43,7 +44,7 @@ $(DISTLOC)/$(TARGET).elf: $(OBJFILES)
 	echo 'LD ' $@
 	echo $(SRCNAMES)
 	-mkdir -p $(shell dirname $@)
-	$(LD) $(CFLAGS) $(LDFLAGS) -o $@ $(OBJFILES) $(CC_LIBS)
+	$(LD) $(CFLAGS) $(LDFLAGS) -T$(LDFILE) -o $@ $(OBJFILES) $(CC_LIBS)
 	$(OBJDUMP) -S $@ > $(DISTLOC)/$(TARGET).lst
 	$(OBJDUMP) -t $@ > $(DISTLOC)/$(TARGET).map
 	$(OBJCOPY) -O binary $@ $(DISTLOC)/$(TARGET).bin
@@ -60,17 +61,21 @@ clean:
 	echo ' >> clean'
 	-rm -rf $(BUILDDIR_BASE) $(DISTDIR_BASE)
 
+$(CH32ROOT)/extern/ch32v003fun/minichlink/minichlink:
+	cd $(CH32ROOT)/extern/ch32v003fun/minichlink && \
+		${MAKE} ${MFLAGS} minichlink
+
 .PHONY: flash
-flash:
+flash: $(CH32ROOT)/extern/ch32v003fun/minichlink/minichlink
 	echo ' >> flash'
 	-$(CH32ROOT)/extern/ch32v003fun/minichlink/minichlink -w $(DISTDIR)/last.bin flash -b
 
 .PHONY: flash_bootloader
-flash_bootloader:
+flash_bootloader: $(CH32ROOT)/extern/ch32v003fun/minichlink/minichlink
 	echo ' >> flash_bootloader'
-	-$(CH32ROOT)/extern/ch32v003fun/minichlink/minichlink -w $(DISTDIR)/last.bin flash -b
+	-$(CH32ROOT)/extern/ch32v003fun/minichlink/minichlink -a -U -w $(DISTDIR)/last.bin bootloader -B
 
 .PHONY: reset
-reset:
+reset: $(CH32ROOT)/extern/ch32v003fun/minichlink/minichlink
 	echo ' >> reset'
 	-$(CH32ROOT)/extern/ch32v003fun/minichlink/minichlink -b

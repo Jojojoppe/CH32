@@ -41,6 +41,11 @@ typedef struct RCC_CFGR0_bits_s {
   uint32_t _r0 : 5;
 } __attribute__((packed)) RCC_CFGR0_bits_t;
 #define RCC_CFGR0_bits (*((volatile RCC_CFGR0_bits_t *)&RCC_CFGR0))
+enum RCC_SYSCLK_SRC {
+  RCC_SYSCLK_SRC_HSI = 0,
+  RCC_SYSCLK_SRC_HSE = 1,
+  RCC_SYSCLK_SRC_PLL = 2,
+};
 
 #define RCC_INTR R32(0x40021008)
 typedef struct RCC_INTR_bits_s {
@@ -67,11 +72,6 @@ typedef struct RCC_INTR_bits_s {
   uint32_t _r0 : 8;
 } __attribute__((packed)) RCC_INTR_bits_t;
 #define RCC_INTR_bits (*((volatile RCC_INTR_bits_t *)&RCC_INTR))
-enum RCC_SYSCLK_SRC {
-  RCC_SYSCLK_SRC_HSI = 0,
-  RCC_SYSCLK_SRC_HSE = 1,
-  RCC_SYSCLK_SRC_PLL = 2,
-};
 
 #define RCC_APB2PRSTR R32(0x4002100c)
 typedef struct RCC_APB2PRSTR_bits_s {

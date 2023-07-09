@@ -25,7 +25,7 @@ SECTIONS {
     *(.rodata*)
     *(.gnu.linkonce.t.*)
     . = ALIGN(4);
-  }
+  } >FLASH AT>FLASH
 
   .fini : {
     KEEP(*(SORT_NONE(.fini)))

@@ -10,8 +10,8 @@
 // #############################################################
 // RCC @ 0x4002100
 // #############################################################
-#define RCC_CLTR R32(0x40021000)
-typedef struct RCC_CLTR_bits_s {
+#define RCC_CTLR R32(0x40021000)
+typedef struct RCC_CTLR_bits_s {
   uint32_t HSION : 1;
   uint32_t HSIRDY : 1;
   uint32_t _r3 : 1;
@@ -33,8 +33,8 @@ typedef struct RCC_CLTR_bits_s {
   uint32_t _r1 : 4;
 #endif
   uint32_t _r0 : 2;
-} __attribute__((packed)) RCC_CLTR_bits_t;
-#define RCC_CLTR_bits (*((volatile RCC_CLTR_bits_t *)&RCC_CLTR))
+} __attribute__((packed)) RCC_CTLR_bits_t;
+#define RCC_CTLR_bits (*((volatile RCC_CTLR_bits_t *)&RCC_CTLR))
 
 #define RCC_CFGR0 R32(0x40021004)
 typedef struct RCC_CFGR0_bits_s {
@@ -556,5 +556,36 @@ typedef struct GPIOx_LCKR_bits_s {
 #define GPIOC_LCKR_bits (*((volatile GPIOx_LCKR_bits_t *)&GPIOC_LCKR))
 #define GPIOD_LCKR_bits (*((volatile GPIOx_LCKR_bits_t *)&GPIOD_LCKR))
 #define GPIOE_LCKR_bits (*((volatile GPIOx_LCKR_bits_t *)&GPIOE_LCKR))
+// #############################################################
+
+// #############################################################
+// System counter @ 0xe000f000
+// #############################################################
+#define STK_CTLR R32(0xe000f000)
+typedef struct STK_CTLR_bits_s {
+  uint32_t STE : 1;
+  uint32_t STIE : 1;
+  uint32_t STCLK : 1;
+  uint32_t STRE : 1;
+  uint32_t MODE : 1;
+  uint32_t INIT : 1;
+  uint32_t _r0 : 25;
+  uint32_t SWIE : 1;
+} __attribute__((packed)) STK_CTLR_bits_t;
+#define STK_CTLR_bits (*((volatile STK_CTLR_bits_t *)&STK_CTLR))
+
+#define STK_SR R32(0xe000f004)
+typedef struct STK_SR_bits_s {
+  uint32_t CNTIF : 1;
+  uint32_t _r0 : 31;
+} __attribute__((packed)) STK_SR_bits_t;
+#define STK_SR_bits (*((volatile STK_SR_bits_t *)&STK_SR))
+
+#define STK_CNTL R32(0xe000f008)
+#define STK_CNTH R32(0xe000f00c)
+
+#define STK_CMPLR R32(0xe000f0010)
+#define STK_CMPHR R32(0xe000f0014)
+// #############################################################
 
 #endif // __H_CH32V203

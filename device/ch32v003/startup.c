@@ -1,3 +1,5 @@
+#include <ch32.h>
+
 #ifdef CPLUSPLUS
 // Method to call the C++ constructors
 void __libc_init_array(void);

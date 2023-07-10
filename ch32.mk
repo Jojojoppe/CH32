@@ -95,4 +95,8 @@ term: $(CH32ROOT)/extern/ch32v003fun/minichlink/minichlink
 	echo ' >> term'
 	-$(CH32ROOT)/extern/ch32v003fun/minichlink/minichlink -w $(DISTDIR)/last.bin flash -b -T
 
+.PHONY: heaeder
+header:
+	echo ' >> header'
+	cd $(CH32ROOT)/device/$(DEVICE) && python $(CH32ROOT)/scripts/genheader.py
 

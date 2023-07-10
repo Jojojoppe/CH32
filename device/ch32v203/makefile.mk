@@ -1,4 +1,4 @@
-CFLAGS += -march=rv32imac -mabi=ilp32e -nostdlib -flto -ffunction-sections
+CFLAGS += -march=rv32imac -mabi=ilp32e -nostdlib -flto -ffunction-sections -fstrict-volatile-bitfields
 CFLAGS += -DCH32V203 -DPART_$(PART)
 LDFLAGS += -Wl,-gc-sections -lgcc
 

@@ -18,6 +18,10 @@ else
 	DISTDIR			:= $(DISTDIR_BASE)/debug
 endif
 
+## ADD HAL
+HAL					:= $(CH32ROOT)/device/$(DEVICE)/hal
+SRCFILES			+= $(shell find $(HAL) -type f -name "*.c")
+
 BUILDLOC			:= $(BUILDDIR)/$(TARGET)
 DISTLOC				:= $(DISTDIR)/$(TARGET)
 
@@ -25,6 +29,7 @@ OBJFILES			:= $(SRCFILES:%.c=$(BUILDLOC)/%.c.o)
 DEPFILES			:= $(SRCFILES:%.c=$(BUILDLOC)/%.c.d)
 
 CC						:= $(PREFIX)-gcc
+GDB						:= $(PREFIX)-gdb
 LD						:= $(PREFIX)-gcc
 AS						:= $(PREFIX)-gcc
 OBJCOPY 			:= $(PREFIX)-objcopy
@@ -79,3 +84,15 @@ flash_bootloader: $(CH32ROOT)/extern/ch32v003fun/minichlink/minichlink
 reset: $(CH32ROOT)/extern/ch32v003fun/minichlink/minichlink
 	echo ' >> reset'
 	-$(CH32ROOT)/extern/ch32v003fun/minichlink/minichlink -b
+
+.PHONY: debug
+debug: $(CH32ROOT)/extern/ch32v003fun/minichlink/minichlink
+	echo ' >> debug @localhost:2000'
+	-$(CH32ROOT)/extern/ch32v003fun/minichlink/minichlink -w $(DISTDIR)/last.bin flash -b -G
+
+.PHONY: term
+term: $(CH32ROOT)/extern/ch32v003fun/minichlink/minichlink
+	echo ' >> term'
+	-$(CH32ROOT)/extern/ch32v003fun/minichlink/minichlink -w $(DISTDIR)/last.bin flash -b -T
+
+

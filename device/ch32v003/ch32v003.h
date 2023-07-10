@@ -25,7 +25,7 @@ typedef struct RCC_CTLR_bits_s {
   uint32_t PLLON : 1;
   uint32_t PLLRDY : 1;
   uint32_t _r0 : 6;
-} __attribute__((packed)) RCC_CTLR_bits_t;
+} RCC_CTLR_bits_t;
 #define RCC_CTLR_bits (*((volatile RCC_CTLR_bits_t *)&RCC_CTLR))
 
 #define RCC_CFGR0 R32(0x40021004)
@@ -39,7 +39,7 @@ typedef struct RCC_CFGR0_bits_s {
   uint32_t _r1 : 7;
   uint32_t MCO : 3;
   uint32_t _r0 : 5;
-} __attribute__((packed)) RCC_CFGR0_bits_t;
+} RCC_CFGR0_bits_t;
 #define RCC_CFGR0_bits (*((volatile RCC_CFGR0_bits_t *)&RCC_CFGR0))
 enum RCC_SYSCLK_SRC {
   RCC_SYSCLK_SRC_HSI = 0,
@@ -70,7 +70,7 @@ typedef struct RCC_INTR_bits_s {
   uint32_t _r1 : 2;
   uint32_t CSSC : 1;
   uint32_t _r0 : 8;
-} __attribute__((packed)) RCC_INTR_bits_t;
+} RCC_INTR_bits_t;
 #define RCC_INTR_bits (*((volatile RCC_INTR_bits_t *)&RCC_INTR))
 
 #define RCC_APB2PRSTR R32(0x4002100c)
@@ -89,7 +89,7 @@ typedef struct RCC_APB2PRSTR_bits_s {
   uint32_t _r1 : 1;
   uint32_t USART1RST : 1;
   uint32_t _r0 : 17;
-} __attribute__((packed)) RCC_APB2PRSTR_bits_t;
+} RCC_APB2PRSTR_bits_t;
 #define RCC_APB2PRSTR_bits (*((volatile RCC_APB2PRSTR_bits_t *)&RCC_APB2PRSTR))
 
 #define RCC_APB1PRSTR R32(0x40021010)
@@ -102,7 +102,7 @@ typedef struct RCC_APB1PRSTR_bits_s {
   uint32_t _r1 : 6;
   uint32_t PWRRST : 1;
   uint32_t _r0 : 3;
-} __attribute__((packed)) RCC_APB1PRSTR_bits_t;
+} RCC_APB1PRSTR_bits_t;
 #define RCC_APB1PRSTR_bits (*((volatile RCC_APB1PRSTR_bits_t *)&RCC_APB1PRSTR))
 
 #define RCC_AHBPCENR R32(0x40021014)
@@ -111,7 +111,7 @@ typedef struct RCC_AHBPCENR_bits_s {
   uint32_t _r1 : 1;
   uint32_t SRAMEN : 1;
   uint32_t _r0 : 29;
-} __attribute__((packed)) RCC_AHBPCENR_bits_t;
+} RCC_AHBPCENR_bits_t;
 #define RCC_AHBPCENR_bits (*((volatile RCC_AHBPCENR_bits_t *)&RCC_AHBPCENR))
 
 #define RCC_APB2PCENR R32(0x40021018)
@@ -130,7 +130,7 @@ typedef struct RCC_APB2PCENR_bits_s {
   uint32_t _r1 : 1;
   uint32_t USART1EN : 1;
   uint32_t _r0 : 17;
-} __attribute__((packed)) RCC_APB2PCENR_bits_t;
+} RCC_APB2PCENR_bits_t;
 #define RCC_APB2PCENR_bits (*((volatile RCC_APB2PCENR_bits_t *)&RCC_APB2PCENR))
 
 #define RCC_APB1PCENR R32(0x4002101c)
@@ -143,7 +143,7 @@ typedef struct RCC_APB1PCENR_bits_s {
   uint32_t _r1 : 6;
   uint32_t PWREN : 1;
   uint32_t _r0 : 3;
-} __attribute__((packed)) RCC_APB1PCENR_bits_t;
+} RCC_APB1PCENR_bits_t;
 #define RCC_APB1PCENR_bits (*((volatile RCC_APB1PCENR_bits_t *)&RCC_APB1PCENR))
 
 #define RCC_RSTSCKR R32(0x40021024)
@@ -159,7 +159,7 @@ typedef struct RCC_RSTSCKR_bits_s {
   uint32_t IWDGRSTF : 1;
   uint32_t WWDGRSTF : 1;
   uint32_t LPWRRSTF : 1;
-} __attribute__((packed)) RCC_RSTSCKR_bits_t;
+} RCC_RSTSCKR_bits_t;
 #define RCC_RSTSCKR_bits (*((volatile RCC_RSTSCKR_bits_t *)&RCC_RSTSCKR))
 
 // #############################################################
@@ -188,7 +188,7 @@ typedef struct GPIOx_CFGLR_bits_s {
   uint32_t CNF6 : 2;
   uint32_t MODE7 : 2;
   uint32_t CNF7 : 2;
-} __attribute__((packed)) GPIOx_CFGLR_bits_t;
+} GPIOx_CFGLR_bits_t;
 #define GPIOA_CFGLR_bits (*((volatile GPIOx_CFGLR_bits_t *)&GPIOA_CFGLR))
 #define GPIOC_CFGLR_bits (*((volatile GPIOx_CFGLR_bits_t *)&GPIOC_CFGLR))
 #define GPIOD_CFGLR_bits (*((volatile GPIOx_CFGLR_bits_t *)&GPIOD_CFGLR))
@@ -223,7 +223,7 @@ typedef struct GPIOx_INDR_bits_s {
   uint32_t INDR6 : 1;
   uint32_t INDR7 : 1;
   uint32_t _r0 : 24;
-} __attribute__((packed)) GPIOx_INDR_bits_t;
+} GPIOx_INDR_bits_t;
 #define GPIOA_INDR_bits (*((volatile GPIOx_INDR_bits_t *)&GPIOA_INDR))
 #define GPIOC_INDR_bits (*((volatile GPIOx_INDR_bits_t *)&GPIOC_INDR))
 #define GPIOD_INDR_bits (*((volatile GPIOx_INDR_bits_t *)&GPIOD_INDR))
@@ -241,7 +241,7 @@ typedef struct GPIOx_OUTDR_bits_s {
   uint32_t ODR6 : 1;
   uint32_t ODR7 : 1;
   uint32_t _r0 : 24;
-} __attribute__((packed)) GPIOx_OUTDR_bits_t;
+} GPIOx_OUTDR_bits_t;
 #define GPIOA_OUTDR_bits (*((volatile GPIOx_OUTDR_bits_t *)&GPIOA_OUTDR))
 #define GPIOC_OUTDR_bits (*((volatile GPIOx_OUTDR_bits_t *)&GPIOC_OUTDR))
 #define GPIOD_OUTDR_bits (*((volatile GPIOx_OUTDR_bits_t *)&GPIOD_OUTDR))
@@ -268,7 +268,7 @@ typedef struct GPIOx_BSHR_bits_s {
   uint32_t BR6 : 1;
   uint32_t BR7 : 1;
   uint32_t _r0 : 8;
-} __attribute__((packed)) GPIOx_BSHR_bits_t;
+} GPIOx_BSHR_bits_t;
 #define GPIOA_BSHR_bits (*((volatile GPIOx_BSHR_bits_t *)&GPIOA_BSHR))
 #define GPIOC_BSHR_bits (*((volatile GPIOx_BSHR_bits_t *)&GPIOC_BSHR))
 #define GPIOD_BSHR_bits (*((volatile GPIOx_BSHR_bits_t *)&GPIOD_BSHR))
@@ -287,7 +287,7 @@ typedef struct GPIOx_BCR_bits_s {
   uint32_t BR7 : 1;
   uint32_t _r0 : 8;
   uint32_t _r1 : 16;
-} __attribute__((packed)) GPIOx_BCR_bits_t;
+} GPIOx_BCR_bits_t;
 #define GPIOA_BCR_bits (*((volatile GPIOx_BCR_bits_t *)&GPIOA_BCR))
 #define GPIOC_BCR_bits (*((volatile GPIOx_BCR_bits_t *)&GPIOC_BCR))
 #define GPIOD_BCR_bits (*((volatile GPIOx_BCR_bits_t *)&GPIOD_BCR))
@@ -306,7 +306,7 @@ typedef struct GPIOx_LCKR_bits_s {
   uint32_t LCK7 : 1;
   uint32_t LCKK : 1;
   uint32_t _r0 : 23;
-} __attribute__((packed)) GPIOx_LCKR_bits_t;
+} GPIOx_LCKR_bits_t;
 #define GPIOA_LCKR_bits (*((volatile GPIOx_LCKR_bits_t *)&GPIOA_LCKR))
 #define GPIOC_LCKR_bits (*((volatile GPIOx_LCKR_bits_t *)&GPIOC_LCKR))
 #define GPIOD_LCKR_bits (*((volatile GPIOx_LCKR_bits_t *)&GPIOD_LCKR))
@@ -324,19 +324,110 @@ typedef struct STK_CTLR_bits_s {
   uint32_t STRE : 1;
   uint32_t _r0 : 27;
   uint32_t SWIE : 1;
-} __attribute__((packed)) STK_CTLR_bits_t;
+} STK_CTLR_bits_t;
 #define STK_CTLR_bits (*((volatile STK_CTLR_bits_t *)&STK_CTLR))
 
 #define STK_SR R32(0xe000f004)
 typedef struct STK_SR_bits_s {
   uint32_t CNTIF : 1;
   uint32_t _r0 : 31;
-} __attribute__((packed)) STK_SR_bits_t;
+} STK_SR_bits_t;
 #define STK_SR_bits (*((volatile STK_SR_bits_t *)&STK_SR))
 
 #define STK_CNTL R32(0xe000f008)
 
 #define STK_CMPLR R32(0xe000f0010)
+// #############################################################
+
+// #############################################################
+// USART @ 0x40013800
+// #############################################################
+#define USART_STATR R32(0x40013800)
+typedef struct USART_STARTR_bits_s {
+  uint32_t PE : 1;
+  uint32_t FE : 1;
+  uint32_t NE : 1;
+  uint32_t ORE : 1;
+  uint32_t IDLE : 1;
+  uint32_t RXNE : 1;
+  uint32_t TC : 1;
+  uint32_t TXE : 1;
+  uint32_t LBD : 1;
+  uint32_t CTS : 1;
+  uint32_t _r0 : 21;
+} USART_STARTR_bits_t;
+#define USART_STATR_bits (*((volatile USART_STARTR_bits_t *)&USART_STATR))
+
+#define USART_DATAR R8(0x40013804)
+
+#define USART_BRR R16(0x40013808)
+typedef struct USART_BRR_bits_s {
+  uint16_t DIV_Fraction : 4;
+  uint16_t DIV_Mantissa : 12;
+} USART_BRR_bits_t;
+#define USART_BRR_bits (*((volatile USART_BRR_bits_t *)&USART_BRR))
+
+#define USART_CTLR1 R32(0x4001380c)
+typedef struct USART_CTLR1_bits_s {
+  uint32_t SBK : 1;
+  uint32_t RWU : 1;
+  uint32_t RE : 1;
+  uint32_t TE : 1;
+  uint32_t IDLEIE : 1;
+  uint32_t RXNEIE : 1;
+  uint32_t TCIE : 1;
+  uint32_t TXEIE : 1;
+  uint32_t PEIE : 1;
+  uint32_t PS : 1;
+  uint32_t PCE : 1;
+  uint32_t WAKE : 1;
+  uint32_t M : 1;
+  uint32_t UE : 1;
+  uint32_t _r0 : 18;
+} USART_CTLR1_bits_t;
+#define USART_CTLR1_bits (*((volatile USART_CTLR1_bits_t *)&USART_CTLR1))
+
+#define USART_CTLR2 R32(0x40013810)
+typedef struct USART_CTLR2_bits_s {
+  uint32_t ADD : 4;
+  uint32_t _r0 : 1;
+  uint32_t LBDL : 1;
+  uint32_t LBDIE : 1;
+  uint32_t _r1 : 1;
+  uint32_t LBCL : 1;
+  uint32_t CPHA : 1;
+  uint32_t CPOL : 1;
+  uint32_t CLKEN : 1;
+  uint32_t STOP : 2;
+  uint32_t LINEN : 1;
+  uint32_t _r2 : 17;
+} USART_CTLR2_bits_t;
+#define USART_CTLR2_bits (*((volatile USART_CTLR2_bits_t *)&USART_CTLR2))
+
+#define USART_CTLR3 R32(0x40013810)
+typedef struct USART_CTLR3_bits_s {
+  uint32_t EIE : 1;
+  uint32_t IREN : 1;
+  uint32_t IRLP : 1;
+  uint32_t HDSEL : 1;
+  uint32_t NACK : 1;
+  uint32_t SCEN : 1;
+  uint32_t DMAR : 1;
+  uint32_t DMAT : 1;
+  uint32_t RTSE : 1;
+  uint32_t CTSE : 1;
+  uint32_t CTSIE : 1;
+  uint32_t _r0 : 21;
+} USART_CTLR3_bits_t;
+#define USART_CTLR3_bits (*((volatile USART_CTLR3_bits_t *)&USART_CTLR3))
+
+#define USART_GPR R32(0x40013810)
+typedef struct USART_GPR_bits_s {
+  uint32_t PSC : 8;
+  uint32_t GT : 8;
+  uint32_t _r0 : 16;
+} USART_GPR_bits_t;
+#define USART_GPR_bits (*((volatile USART_GPR_bits_t *)&USART_GPR))
 // #############################################################
 
 #endif // __H_CH32V003

@@ -117,20 +117,8 @@ typedef struct AFIO_PCFR1_bits_s {
   uint32_t I2C1RM : 1;
   uint32_t USART1_RM : 1;
   uint32_t _r0 : 3;
-  union {
-    uint32_t TIM1RM : 2;
-    struct {
-      uint32_t TIM1RM__b0 : 1;
-      uint32_t TIM1RM__b1 : 1;
-    };
-  };
-  union {
-    uint32_t TIM2RM : 2;
-    struct {
-      uint32_t TIM2RM__b0 : 1;
-      uint32_t TIM2RM__b1 : 1;
-    };
-  };
+  uint32_t TIM1RM : 2;
+  uint32_t TIM2RM : 2;
   uint32_t _r1 : 5;
   uint32_t PA12_RM : 1;
   uint32_t _r2 : 1;
@@ -172,118 +160,22 @@ typedef struct AFIO_EXTICR_bits_s {
 
 #define GPIOA_CFGLR R32(0x40010800)
 typedef struct GPIOx_CFGLR_bits_s {
-  union {
-    uint32_t MODE0 : 2;
-    struct {
-      uint32_t MODE0__b0 : 1;
-      uint32_t MODE0__b1 : 1;
-    };
-  };
-  union {
-    uint32_t CNF0 : 2;
-    struct {
-      uint32_t CNF0__b0 : 1;
-      uint32_t CNF0__b1 : 1;
-    };
-  };
-  union {
-    uint32_t MODE1 : 2;
-    struct {
-      uint32_t MODE1__b0 : 1;
-      uint32_t MODE1__b1 : 1;
-    };
-  };
-  union {
-    uint32_t CNF1 : 2;
-    struct {
-      uint32_t CNF1__b0 : 1;
-      uint32_t CNF1__b1 : 1;
-    };
-  };
-  union {
-    uint32_t MODE2 : 2;
-    struct {
-      uint32_t MODE2__b0 : 1;
-      uint32_t MODE2__b1 : 1;
-    };
-  };
-  union {
-    uint32_t CNF2 : 2;
-    struct {
-      uint32_t CNF2__b0 : 1;
-      uint32_t CNF2__b1 : 1;
-    };
-  };
-  union {
-    uint32_t MODE3 : 2;
-    struct {
-      uint32_t MODE3__b0 : 1;
-      uint32_t MODE3__b1 : 1;
-    };
-  };
-  union {
-    uint32_t CNF3 : 2;
-    struct {
-      uint32_t CNF3__b0 : 1;
-      uint32_t CNF3__b1 : 1;
-    };
-  };
-  union {
-    uint32_t MODE4 : 2;
-    struct {
-      uint32_t MODE4__b0 : 1;
-      uint32_t MODE4__b1 : 1;
-    };
-  };
-  union {
-    uint32_t CNF4 : 2;
-    struct {
-      uint32_t CNF4__b0 : 1;
-      uint32_t CNF4__b1 : 1;
-    };
-  };
-  union {
-    uint32_t MODE5 : 2;
-    struct {
-      uint32_t MODE5__b0 : 1;
-      uint32_t MODE5__b1 : 1;
-    };
-  };
-  union {
-    uint32_t CNF5 : 2;
-    struct {
-      uint32_t CNF5__b0 : 1;
-      uint32_t CNF5__b1 : 1;
-    };
-  };
-  union {
-    uint32_t MODE6 : 2;
-    struct {
-      uint32_t MODE6__b0 : 1;
-      uint32_t MODE6__b1 : 1;
-    };
-  };
-  union {
-    uint32_t CNF6 : 2;
-    struct {
-      uint32_t CNF6__b0 : 1;
-      uint32_t CNF6__b1 : 1;
-    };
-  };
-  union {
-    uint32_t MODE7 : 2;
-    struct {
-      uint32_t MODE7__b0 : 1;
-      uint32_t MODE7__b1 : 1;
-    };
-  };
-  union {
-    uint32_t CNF7 : 2;
-    struct {
-      uint32_t CNF7__b0 : 1;
-      uint32_t CNF7__b1 : 1;
-    };
-  };
+  uint32_t MODE0 : 2;
+  uint32_t CNF0 : 2;
+  uint32_t MODE1 : 2;
+  uint32_t CNF1 : 2;
+  uint32_t MODE2 : 2;
+  uint32_t CNF2 : 2;
+  uint32_t MODE3 : 2;
+  uint32_t CNF3 : 2;
+  uint32_t MODE4 : 2;
+  uint32_t CNF4 : 2;
+  uint32_t MODE5 : 2;
+  uint32_t CNF5 : 2;
+  uint32_t MODE6 : 2;
+  uint32_t CNF6 : 2;
+  uint32_t MODE7 : 2;
+  uint32_t CNF7 : 2;
 } GPIOx_CFGLR_bits_t;
 #define GPIOA_CFGLR_bits (*((volatile GPIOx_CFGLR_bits_t *)&GPIOA_CFGLR))
 
@@ -505,52 +397,15 @@ typedef struct USART_STATR_bits_s {
 
 #define USART_DATAR R32(0x40013804)
 typedef struct USART_DATAR_bits_s {
-  union {
-    uint32_t DR : 9;
-    struct {
-      uint32_t DR__b0 : 1;
-      uint32_t DR__b1 : 1;
-      uint32_t DR__b2 : 1;
-      uint32_t DR__b3 : 1;
-      uint32_t DR__b4 : 1;
-      uint32_t DR__b5 : 1;
-      uint32_t DR__b6 : 1;
-      uint32_t DR__b7 : 1;
-      uint32_t DR__b8 : 1;
-    };
-  };
+  uint32_t DR : 9;
   uint32_t _r0 : 23;
 } USART_DATAR_bits_t;
 #define USART_DATAR_bits (*((volatile USART_DATAR_bits_t *)&USART_DATAR))
 
 #define USART_BRR R32(0x40013808)
 typedef struct USART_BRR_bits_s {
-  union {
-    uint32_t DIV_Fraction : 4;
-    struct {
-      uint32_t DIV_Fraction__b0 : 1;
-      uint32_t DIV_Fraction__b1 : 1;
-      uint32_t DIV_Fraction__b2 : 1;
-      uint32_t DIV_Fraction__b3 : 1;
-    };
-  };
-  union {
-    uint32_t DIV_Mantissa : 12;
-    struct {
-      uint32_t DIV_Mantissa__b0 : 1;
-      uint32_t DIV_Mantissa__b1 : 1;
-      uint32_t DIV_Mantissa__b2 : 1;
-      uint32_t DIV_Mantissa__b3 : 1;
-      uint32_t DIV_Mantissa__b4 : 1;
-      uint32_t DIV_Mantissa__b5 : 1;
-      uint32_t DIV_Mantissa__b6 : 1;
-      uint32_t DIV_Mantissa__b7 : 1;
-      uint32_t DIV_Mantissa__b8 : 1;
-      uint32_t DIV_Mantissa__b9 : 1;
-      uint32_t DIV_Mantissa__b10 : 1;
-      uint32_t DIV_Mantissa__b11 : 1;
-    };
-  };
+  uint32_t DIV_Fraction : 4;
+  uint32_t DIV_Mantissa : 12;
   uint32_t _r0 : 16;
 } USART_BRR_bits_t;
 #define USART_BRR_bits (*((volatile USART_BRR_bits_t *)&USART_BRR))
@@ -577,15 +432,7 @@ typedef struct USART_CTLR1_bits_s {
 
 #define USART_CTLR2 R32(0x40013810)
 typedef struct USART_CTLR2_bits_s {
-  union {
-    uint32_t ADD : 4;
-    struct {
-      uint32_t ADD__b0 : 1;
-      uint32_t ADD__b1 : 1;
-      uint32_t ADD__b2 : 1;
-      uint32_t ADD__b3 : 1;
-    };
-  };
+  uint32_t ADD : 4;
   uint32_t _r0 : 1;
   uint32_t LBDL : 1;
   uint32_t LBDIE : 1;
@@ -594,13 +441,7 @@ typedef struct USART_CTLR2_bits_s {
   uint32_t CPHA : 1;
   uint32_t CPOL : 1;
   uint32_t CLKEN : 1;
-  union {
-    uint32_t STOP : 2;
-    struct {
-      uint32_t STOP__b0 : 1;
-      uint32_t STOP__b1 : 1;
-    };
-  };
+  uint32_t STOP : 2;
   uint32_t LINEN : 1;
   uint32_t _r2 : 17;
 } USART_CTLR2_bits_t;
@@ -625,32 +466,8 @@ typedef struct USART_CTLR3_bits_s {
 
 #define USART_GPR R32(0x40013818)
 typedef struct USART_GPR_bits_s {
-  union {
-    uint32_t PSC : 8;
-    struct {
-      uint32_t PSC__b0 : 1;
-      uint32_t PSC__b1 : 1;
-      uint32_t PSC__b2 : 1;
-      uint32_t PSC__b3 : 1;
-      uint32_t PSC__b4 : 1;
-      uint32_t PSC__b5 : 1;
-      uint32_t PSC__b6 : 1;
-      uint32_t PSC__b7 : 1;
-    };
-  };
-  union {
-    uint32_t GT : 8;
-    struct {
-      uint32_t GT__b0 : 1;
-      uint32_t GT__b1 : 1;
-      uint32_t GT__b2 : 1;
-      uint32_t GT__b3 : 1;
-      uint32_t GT__b4 : 1;
-      uint32_t GT__b5 : 1;
-      uint32_t GT__b6 : 1;
-      uint32_t GT__b7 : 1;
-    };
-  };
+  uint32_t PSC : 8;
+  uint32_t GT : 8;
   uint32_t _r0 : 16;
 } USART_GPR_bits_t;
 #define USART_GPR_bits (*((volatile USART_GPR_bits_t *)&USART_GPR))
@@ -720,74 +537,29 @@ typedef struct RCC_CTLR_bits_s {
   uint32_t HSION : 1;
   uint32_t HSIRDY : 1;
   uint32_t _r0 : 1;
-  union {
-    uint32_t HSITRIM : 5;
-    struct {
-      uint32_t HSITRIM__b0 : 1;
-      uint32_t HSITRIM__b1 : 1;
-      uint32_t HSITRIM__b2 : 1;
-      uint32_t HSITRIM__b3 : 1;
-      uint32_t HSITRIM__b4 : 1;
-    };
-  };
-  uint32_t _r1 : 8;
+  uint32_t HSITRIM : 5;
+  uint32_t HSICAL : 8;
   uint32_t HSEON : 1;
   uint32_t HSERDY : 1;
   uint32_t HSEBYP : 1;
   uint32_t CSSON : 1;
-  uint32_t _r2 : 4;
+  uint32_t _r1 : 4;
   uint32_t PLLON : 1;
   uint32_t PLLRDY : 1;
-  uint32_t _r3 : 6;
+  uint32_t _r2 : 6;
 } RCC_CTLR_bits_t;
 #define RCC_CTLR_bits (*((volatile RCC_CTLR_bits_t *)&RCC_CTLR))
 
 #define RCC_CFGR0 R32(0x40021004)
 typedef struct RCC_CFGR0_bits_s {
-  union {
-    uint32_t SW : 2;
-    struct {
-      uint32_t SW__b0 : 1;
-      uint32_t SW__b1 : 1;
-    };
-  };
-  union {
-    uint32_t SWS : 2;
-    struct {
-      uint32_t SWS__b0 : 1;
-      uint32_t SWS__b1 : 1;
-    };
-  };
-  union {
-    uint32_t HPRE : 4;
-    struct {
-      uint32_t HPRE__b0 : 1;
-      uint32_t HPRE__b1 : 1;
-      uint32_t HPRE__b2 : 1;
-      uint32_t HPRE__b3 : 1;
-    };
-  };
+  uint32_t SW : 2;
+  uint32_t SWS : 2;
+  uint32_t HPRE : 4;
   uint32_t _r0 : 3;
-  union {
-    uint32_t ADCPRE : 5;
-    struct {
-      uint32_t ADCPRE__b0 : 1;
-      uint32_t ADCPRE__b1 : 1;
-      uint32_t ADCPRE__b2 : 1;
-      uint32_t ADCPRE__b3 : 1;
-      uint32_t ADCPRE__b4 : 1;
-    };
-  };
+  uint32_t ADCPRE : 5;
   uint32_t PLLSRC : 1;
   uint32_t _r1 : 7;
-  union {
-    uint32_t MCO : 3;
-    struct {
-      uint32_t MCO__b0 : 1;
-      uint32_t MCO__b1 : 1;
-      uint32_t MCO__b2 : 1;
-    };
-  };
+  uint32_t MCO : 3;
   uint32_t _r2 : 5;
 } RCC_CFGR0_bits_t;
 #define RCC_CFGR0_bits (*((volatile RCC_CFGR0_bits_t *)&RCC_CFGR0))
@@ -961,85 +733,13 @@ typedef struct STK_SR_bits_s {
 
 #define STK_CNTL R32(0xE000F008)
 typedef struct STK_CNTL_bits_s {
-  union {
-    uint32_t CNT : 32;
-    struct {
-      uint32_t CNT__b0 : 1;
-      uint32_t CNT__b1 : 1;
-      uint32_t CNT__b2 : 1;
-      uint32_t CNT__b3 : 1;
-      uint32_t CNT__b4 : 1;
-      uint32_t CNT__b5 : 1;
-      uint32_t CNT__b6 : 1;
-      uint32_t CNT__b7 : 1;
-      uint32_t CNT__b8 : 1;
-      uint32_t CNT__b9 : 1;
-      uint32_t CNT__b10 : 1;
-      uint32_t CNT__b11 : 1;
-      uint32_t CNT__b12 : 1;
-      uint32_t CNT__b13 : 1;
-      uint32_t CNT__b14 : 1;
-      uint32_t CNT__b15 : 1;
-      uint32_t CNT__b16 : 1;
-      uint32_t CNT__b17 : 1;
-      uint32_t CNT__b18 : 1;
-      uint32_t CNT__b19 : 1;
-      uint32_t CNT__b20 : 1;
-      uint32_t CNT__b21 : 1;
-      uint32_t CNT__b22 : 1;
-      uint32_t CNT__b23 : 1;
-      uint32_t CNT__b24 : 1;
-      uint32_t CNT__b25 : 1;
-      uint32_t CNT__b26 : 1;
-      uint32_t CNT__b27 : 1;
-      uint32_t CNT__b28 : 1;
-      uint32_t CNT__b29 : 1;
-      uint32_t CNT__b30 : 1;
-      uint32_t CNT__b31 : 1;
-    };
-  };
+  uint32_t CNT : 32;
 } STK_CNTL_bits_t;
 #define STK_CNTL_bits (*((volatile STK_CNTL_bits_t *)&STK_CNTL))
 
 #define STK_CMPLR R32(0xE000F010)
 typedef struct STK_CMPLR_bits_s {
-  union {
-    uint32_t CMP : 32;
-    struct {
-      uint32_t CMP__b0 : 1;
-      uint32_t CMP__b1 : 1;
-      uint32_t CMP__b2 : 1;
-      uint32_t CMP__b3 : 1;
-      uint32_t CMP__b4 : 1;
-      uint32_t CMP__b5 : 1;
-      uint32_t CMP__b6 : 1;
-      uint32_t CMP__b7 : 1;
-      uint32_t CMP__b8 : 1;
-      uint32_t CMP__b9 : 1;
-      uint32_t CMP__b10 : 1;
-      uint32_t CMP__b11 : 1;
-      uint32_t CMP__b12 : 1;
-      uint32_t CMP__b13 : 1;
-      uint32_t CMP__b14 : 1;
-      uint32_t CMP__b15 : 1;
-      uint32_t CMP__b16 : 1;
-      uint32_t CMP__b17 : 1;
-      uint32_t CMP__b18 : 1;
-      uint32_t CMP__b19 : 1;
-      uint32_t CMP__b20 : 1;
-      uint32_t CMP__b21 : 1;
-      uint32_t CMP__b22 : 1;
-      uint32_t CMP__b23 : 1;
-      uint32_t CMP__b24 : 1;
-      uint32_t CMP__b25 : 1;
-      uint32_t CMP__b26 : 1;
-      uint32_t CMP__b27 : 1;
-      uint32_t CMP__b28 : 1;
-      uint32_t CMP__b29 : 1;
-      uint32_t CMP__b30 : 1;
-      uint32_t CMP__b31 : 1;
-    };
-  };
+  uint32_t CMP : 32;
 } STK_CMPLR_bits_t;
 #define STK_CMPLR_bits (*((volatile STK_CMPLR_bits_t *)&STK_CMPLR))
 #endif // __H_CH32V003

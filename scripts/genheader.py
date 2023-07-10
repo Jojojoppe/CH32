@@ -71,7 +71,7 @@ with open(f'{device}.h', 'w') as f:
                     f.write(f'  uint{reg["size"]}_t _r{reserved} : {b["start"]-index};\n')
                     reserved += 1
                     index += b["start"]-index
-                if b["start"]==b["end"]:
+                if True or b["start"]==b["end"]:
                     f.write(f'  uint{reg["size"]}_t {b["name"]} : {b["end"]-b["start"]+1};\n')
                 else:
                     f.write(f'  union {{\n')

@@ -93,7 +93,7 @@ debug: $(CH32ROOT)/extern/ch32v003fun/minichlink/minichlink
 .PHONY: term
 term: $(CH32ROOT)/extern/ch32v003fun/minichlink/minichlink
 	echo ' >> term'
-	-$(CH32ROOT)/extern/ch32v003fun/minichlink/minichlink -w $(DISTDIR)/last.bin flash -b -T
+	-$(CH32ROOT)/extern/ch32v003fun/minichlink/minichlink -w $(DISTDIR)/last.bin flash -b -T 9600
 
 .PHONY: heaeder
 header:

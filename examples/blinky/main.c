@@ -1,5 +1,6 @@
 #include <ch32.h>
 #include <hal/system.h>
+#include <hal/trace.h>
 
 #include <stdint.h>
 
@@ -9,8 +10,20 @@ void delayTick(uint32_t n) {
     ;
 }
 
+int putchar(int c) {
+  // 	while( !(USART1->STATR & USART_FLAG_TC));
+  while (!USART_STATR_bits.TC)
+    ;
+  // 	USART1->DATAR = (const char)c;
+  USART_DATAR = c;
+  return 1;
+}
+
 int main() {
   clockInit(CLOCK_CONFIG_DEFAULT);
+
+  traceInit();
+  traceWaitForDebugger();
 
   // Enable system clock
   STK_CTLR_bits.STCLK = 1;
@@ -18,17 +31,24 @@ int main() {
 
   // D5/D6 are TX/RX
   // enable gpio+uart in APB2
+  RCC_APB2PCENR_bits.USART1EN = 1;
+  RCC_APB2PCENR_bits.IOPDEN = 1;
   // Set D5 @ 10MHz+func push pull
-  // usart1->ctlr1 = 8b no_parity mode_tx
-  // usart1->ctlr2 = stopbits_1
-  // usart1->ctlr3 = flow_control_none
-  // usart1->brr = brr (115200)
-  // usart1->ctlr1 += UE_Set
-  // int putchar(int c){
-  // 	while( !(USART1->STATR & USART_FLAG_TC));
-  // 	USART1->DATAR = (const char)c;
-  // 	return 1;
-  // }
+  AFIO_PCFR1_bits.USART1_RM = 0;
+  AFIO_PCFR1_bits.USART1_RM1 = 0;
+  GPIOD_CFGLR_bits.CNF5 = GPIO_CNF_OUTPUT_FUNC_PUSH_PULL;
+  GPIOD_CFGLR_bits.MODE5 = GPIO_MODE_OUTPUT_10MHZ;
+  AFIO_PCFR1_bits.USART1_RM = 0;
+  AFIO_PCFR1_bits.USART1_RM1 = 0; // Default mapping to d5/d6
+  USART_CTLR1_bits.M = 0;         // 8b
+  USART_CTLR1_bits.PCE = 0;       // No parity check
+  USART_CTLR1_bits.TE = 1;        // Enable transmit mode
+  USART_CTLR2_bits.STOP = 0;      // 1 stopbit
+  USART_CTLR3_bits.CTSE = 0;
+  USART_CTLR3_bits.RTSE = 0;
+  USART_BRR_bits.DIV_Fraction = 8;
+  USART_BRR_bits.DIV_Mantissa = 312; // 9600 baud
+  USART_CTLR1_bits.UE = 1;           // Enable UART
 
 #ifdef CH32V003
   RCC_APB2PCENR_bits.IOPDEN = 1;
@@ -49,6 +69,8 @@ int main() {
     GPIOB_OUTDR_bits.ODR8 ^= 1;
 #endif
     delayTick(getClockFrequency() / 2);
+    putchar('B');
+    tracePutChar('A');
   }
   return 0;
 }

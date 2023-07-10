@@ -1,591 +1,403 @@
-/**
- * @file ch32v203.h
- * @author Joppe Blondel
- * @date 2023-07-07
- * @brief
- */
 #ifndef __H_CH32V203
 #define __H_CH32V203
 
-// #############################################################
-// RCC @ 0x4002100
-// #############################################################
-#define RCC_CTLR R32(0x40021000)
-typedef struct RCC_CTLR_bits_s {
-  uint32_t HSION : 1;
-  uint32_t HSIRDY : 1;
-  uint32_t _r3 : 1;
-  uint32_t HSITRIM : 5;
-  uint32_t HSICAL : 8;
-  uint32_t HSEON : 1;
-  uint32_t HSERDY : 1;
-  uint32_t HSEBYP : 1;
-  uint32_t CSSON : 1;
-  uint32_t _r2 : 4;
-  uint32_t PLLON : 1;
-  uint32_t PLLRDY : 1;
-#if defined(PART_D8C)
-  uint32_t PLL2ON : 1;
-  uint32_t PLL2RDY : 1;
-  uint32_t PLL3ON : 1;
-  uint32_t PLL3RDY : 1;
-#else
-  uint32_t _r1 : 4;
-#endif
-  uint32_t _r0 : 2;
-} RCC_CTLR_bits_t;
-#define RCC_CTLR_bits (*((volatile RCC_CTLR_bits_t *)&RCC_CTLR))
+#define ESIG_FLACAP R32(0x1FFFF7E0)
 
-#define RCC_CFGR0 R32(0x40021004)
-typedef struct RCC_CFGR0_bits_s {
-  uint32_t SW : 2;
-  uint32_t SWS : 2;
-  uint32_t HPRE : 4;
-  uint32_t PPRE1 : 3;
-  uint32_t PPRE2 : 3;
-  uint32_t ADCPRE : 2;
-  uint32_t PLLSRC : 1;
-  uint32_t PLLXTPRE : 1;
-  uint32_t PLLMUL : 4;
-#if defined(PART_D8W)
-  uint32_t USBPRE : 2;
-#else
-  uint32_t _r0 : 2;
-#endif
-  uint32_t MCO : 4;
-#if defined(PART_D8W)
-  uint32_t ETHPRE : 1;
-#else
-  uint32_t _r1 : 1;
-#endif
-  uint32_t _r2 : 2;
-  uint32_t ADCDUTY : 1;
-} RCC_CFGR0_bits_t;
-#define RCC_CFGR0_bits (*((volatile RCC_CFGR0_bits_t *)&RCC_CFGR0))
-enum RCC_SYSCLK_SRC {
-  RCC_SYSCLK_SRC_HSI = 0,
-  RCC_SYSCLK_SRC_HSE = 1,
-  RCC_SYSCLK_SRC_PLL = 2,
-};
+#define ESIG_UNIID1 R32(0x1FFFF7E8)
 
-#define RCC_INTR R32(0x40021008)
-typedef struct RCC_INTR_bits_s {
-  uint32_t LSIRDYF : 1;
-  uint32_t LSERDYF : 1;
-  uint32_t HSIRDYF : 1;
-  uint32_t HSERDYF : 1;
-  uint32_t PLLRDYF : 1;
-  uint32_t PLL2DRYF : 1;
-  uint32_t PLL3DRYF : 1;
-  uint32_t CSSF : 1;
-  uint32_t LSIRDYIE : 1;
-  uint32_t LSERDYIE : 1;
-  uint32_t HSIRDYIE : 1;
-  uint32_t HSERDYIE : 1;
-  uint32_t PLLRDYIE : 1;
-  uint32_t PLL2RDYIE : 1;
-  uint32_t PLL3RDYIE : 1;
-  uint32_t _r1 : 1;
-  uint32_t LSIRDYC : 1;
-  uint32_t LSERDYC : 1;
-  uint32_t HSIRDYC : 1;
-  uint32_t HSERDYC : 1;
-  uint32_t PLLRDYC : 1;
-  uint32_t PLL2RDYC : 1;
-  uint32_t PLL3RDYC : 1;
-  uint32_t CSSC : 1;
-  uint32_t _r0 : 8;
-} RCC_INTR_bits_t;
-#define RCC_INTR_bits (*((volatile RCC_INTR_bits_t *)&RCC_INTR))
+#define ESIG_UNIID2 R32(0x1FFFF7EC)
 
-#define RCC_APB2PRSTR R32(0x4002100c)
-typedef struct RCC_APB2PRSTR_bits_s {
-  uint32_t AFIORST : 1;
-  uint32_t _r3 : 1;
-  uint32_t IOPARST : 1;
-  uint32_t IOPBRST : 1;
-  uint32_t IOPCRST : 1;
-  uint32_t IOPDRST : 1;
-  uint32_t IOPERST : 1;
-  uint32_t _r2 : 2;
-  uint32_t ADC1RST : 1;
-  uint32_t ADC2RST : 1;
-  uint32_t TIM1RST : 1;
-  uint32_t SPI1RST : 1;
-  uint32_t TIM8RST : 1;
-  uint32_t USART1RST : 1;
-  uint32_t _r1 : 4;
-  uint32_t TIM9RST : 1;
-  uint32_t TIM10RST : 1;
-  uint32_t _r0 : 11;
-} RCC_APB2PRSTR_bits_t;
-#define RCC_APB2PRSTR_bits (*((volatile RCC_APB2PRSTR_bits_t *)&RCC_APB2PRSTR))
+#define ESIG_UNIID3 R32(0x1FFFF7F0)
 
-#define RCC_APB1PRSTR R32(0x40021010)
-typedef struct RCC_APB1PRSTR_bits_s {
-  uint32_t TIM2RST : 1;
-  uint32_t TIM3RST : 1;
-  uint32_t TIM4RST : 1;
-  uint32_t TIM5RST : 1;
-  uint32_t TIM6RST : 1;
-  uint32_t TIM7RST : 1;
-  uint32_t UART6RST : 1;
-  uint32_t UART7RST : 1;
-  uint32_t UART8RST : 1;
-  uint32_t _r4 : 2;
-  uint32_t WWDGRST : 1;
-  uint32_t _r3 : 2;
-  uint32_t SPI2RST : 1;
-  uint32_t SPI3RST : 1;
-  uint32_t _r2 : 1;
-  uint32_t USART2RST : 1;
-  uint32_t USART3RST : 1;
-  uint32_t UART4RST : 1;
-  uint32_t UART5RST : 1;
-  uint32_t I2C1RST : 1;
-  uint32_t I2C2RST : 1;
-  uint32_t USBDRST : 1;
-  uint32_t _r1 : 1;
-  uint32_t CAN1RST : 1;
-  uint32_t CAN2RST : 1;
-  uint32_t BKPRST : 1;
-  uint32_t PWRRST : 1;
-  uint32_t DACRST : 1;
-  uint32_t _r0 : 2;
-} RCC_APB1PRSTR_bits_t;
-#define RCC_APB1PRSTR_bits (*((volatile RCC_APB1PRSTR_bits_t *)&RCC_APB1PRSTR))
+#define TIM2_CTLR1 R32(0x40000000)
 
-#define RCC_AHBPCENR R32(0x40021014)
-typedef struct RCC_AHBPCENR_bits_s {
-  uint32_t DMA1EN : 1;
-  uint32_t DMA2EN : 1;
-  uint32_t SRAMEN : 1;
-  uint32_t _r4 : 3;
-  uint32_t CRCEN : 1;
-  uint32_t _r3 : 1;
-  uint32_t FSMCEN : 1;
-  uint32_t RNGEN : 1;
-  uint32_t SDIOEN : 1;
-  uint32_t USBHSEN : 1;
-  uint32_t OTG_FSEN : 1;
-  uint32_t DVPEN : 1;
-#if defined(PAT_D8C)
-  uint32_t ETHMACEN : 1;
-  uint32_t ETHMACTXEN : 1;
-  uint32_t ETHMACRXEN : 1;
-#else
-  uint32_t _r2 : 3;
-#endif
-#if defined(PART_D8W)
-  uint32_t BLEC : 1;
-  uint32_t BLEN : 1;
-#else
-  uint32_t _r1 : 2;
-#endif
-  uint32_t _r0 : 14;
-} RCC_AHBPCENR_bits_t;
-#define RCC_AHBPCENR_bits (*((volatile RCC_AHBPCENR_bits_t *)&RCC_AHBPCENR))
+#define TIM2_CTLR2 R32(0x40000004)
 
-#define RCC_APB2PCENR R32(0x40021018)
-typedef struct RCC_APB2PCENR_bits_s {
-  uint32_t AFIOEN : 1;
-  uint32_t _r3 : 1;
-  uint32_t IOPAEN : 1;
-  uint32_t IOPBEN : 1;
-  uint32_t IOPCEN : 1;
-  uint32_t IOPDEN : 1;
-  uint32_t IOPEEN : 1;
-  uint32_t _r2 : 2;
-  uint32_t ADC1EN : 1;
-  uint32_t ADC2EN : 1;
-  uint32_t TIM1EN : 1;
-  uint32_t SPI1EN : 1;
-  uint32_t TIM8EN : 1;
-  uint32_t USART1EN : 1;
-  uint32_t _r1 : 4;
-  uint32_t TIM9EN : 1;
-  uint32_t TIM10EN : 1;
-  uint32_t _r0 : 11;
-} RCC_APB2PCENR_bits_t;
-#define RCC_APB2PCENR_bits (*((volatile RCC_APB2PCENR_bits_t *)&RCC_APB2PCENR))
+#define TIM2_SMCFGR R32(0x40000008)
 
-#define RCC_APB1PCENR R32(0x4002101c)
-typedef struct RCC_APB1PCENR_bits_s {
-  uint32_t TIM2EN : 1;
-  uint32_t TIM3EN : 1;
-  uint32_t TIM4EN : 1;
-  uint32_t TIM5EN : 1;
-  uint32_t TIM6EN : 1;
-  uint32_t TIM7EN : 1;
-  uint32_t UART6EN : 1;
-  uint32_t UART7EN : 1;
-  uint32_t UART8EN : 1;
-  uint32_t _r4 : 2;
-  uint32_t WWDGEN : 1;
-  uint32_t _r3 : 2;
-  uint32_t SPI2EN : 1;
-  uint32_t SPI3EN : 1;
-  uint32_t _r2 : 1;
-  uint32_t USART2EN : 1;
-  uint32_t USART3EN : 1;
-  uint32_t UART4EN : 1;
-  uint32_t UART5EN : 1;
-  uint32_t I2C1EN : 1;
-  uint32_t I2C2EN : 1;
-  uint32_t USBDEN : 1;
-  uint32_t _r1 : 1;
-  uint32_t CAN1EN : 1;
-  uint32_t CAN2EN : 1;
-  uint32_t BKPEN : 1;
-  uint32_t PWREN : 1;
-  uint32_t DACEN : 1;
-  uint32_t _r0 : 2;
-} RCC_APB1PCENR_bits_t;
-#define RCC_APB1PCENR_bits (*((volatile RCC_APB1PCENR_bits_t *)&RCC_APB1PCENR))
+#define TIM2_DMAINTENR R32(0x4000000C)
 
-#define RCC_BDCTRL R32(0x40021020)
-typedef struct RCC_BDCTRL_bits_s {
-  uint32_t LSEON : 1;
-  uint32_t LSERDY : 1;
-  uint32_t LSEBYP : 1;
-  uint32_t _r0 : 5;
-  uint32_t RTCSEL : 2;
-  uint32_t _r1 : 5;
-  uint32_t RTCEN : 1;
-  uint32_t BDRST : 1;
-  uint32_t _r2 : 15;
-} RCC_BDCTRL_bits_t;
-#define RCC_BDCTL_bits (*((volatile RCC_BDCTL_bits_t *)&RCC_BDCTRL))
-enum RCC_RTC_SOURCE {
-  RCC_RTC_SOURCE_NO_CLOCK = 0,
-  RCC_RTC_SOURCE_LSE = 1,
-  RCC_RTC_SOURCE_LSI = 2,
-  RCC_RTC_SOURCE_HSE = 3,
-};
+#define TIM2_INTFR R32(0x40000010)
 
-#define RCC_RSTSCKR R32(0x40021024)
-typedef struct RCC_RSTSCKR_bits_s {
-  uint32_t LSION : 1;
-  uint32_t LSIRDY : 1;
-  uint32_t _r1 : 22;
-  uint32_t RMVF : 1;
-  uint32_t _r0 : 1;
-  uint32_t PINRSTF : 1;
-  uint32_t PORRSTF : 1;
-  uint32_t SFTRSTF : 1;
-  uint32_t IWDGRSTF : 1;
-  uint32_t WWDGRSTF : 1;
-  uint32_t LPWRRSTF : 1;
-} RCC_RSTSCKR_bits_t;
-#define RCC_RSTSCKR_bits (*((volatile RCC_RSTSCKR_bits_t *)&RCC_RSTSCKR))
+#define TIM2_SWEVGR R32(0x40000014)
 
-#define RCC_AHBRSTR R32(0x40021028)
-typedef struct RCC_AHBRSTR_bits_s {
-  uint32_t _r0 : 12;
-  uint32_t OTGFSRST : 1;
-  uint32_t DVPRST : 1;
-  uint32_t ETHMACRST : 1;
-  uint32_t _r : 17;
-} RCC_AHBRSTR_bits_t;
-#define RCC_AHBRSTR_bits (*((volatile RCC_AHBRSTR_bits_t *)&RCC_AHBRSTR))
+#define TIM2_CHCTLR1 R32(0x40000018)
 
-#define RCC_CFGR2 R32(0x40021028)
-typedef struct RCC_CFGR2_bits_s {
-  uint32_t PREDIV1 : 4;
-  uint32_t PREDIV2 : 4;
-  uint32_t PLL2MUL : 4;
-  uint32_t PLL3MUL : 4;
-  uint32_t PREDIV1SRC : 1;
-  uint32_t I2S2SRC : 1;
-  uint32_t I2S3SRC : 1;
-  uint32_t RNGSRC : 1;
-  uint32_t ETH1SERC : 2;
-  uint32_t ETH1GEN : 1;
-  uint32_t _r0 : 1;
-  uint32_t USBHSDIV : 3;
-  uint32_t USBHSPLL_SRC : 1;
-  uint32_t USBHSCLK : 2;
-  uint32_t USBHSPLL : 1;
-  uint32_t USBHSSRC : 1;
-} RCC_CFGR2_bits_t;
-#define RCC_CFGR2_bits (*((volatile RCC_CFGR2_bits_t *)&RCC_CFGR2))
+#define TIM2_CHCTLR2 R32(0x4000001C)
 
-// #############################################################
+#define TIM2_CCER R32(0x40000020)
 
-// #############################################################
-// GPIO @ 0x40010800, 0x40010c00, 0x40011000, 0x40011400,
-// 0x40011800
-// #############################################################
+#define TIM2_CNT R32(0x40000024)
+
+#define TIM2_PSC R32(0x40000028)
+
+#define TIM2_ATRLR R32(0x4000002C)
+
+#define TIM2_CH1CVR R32(0x40000034)
+
+#define TIM2_CH2CVR R32(0x40000038)
+
+#define TIM2_CH3CVR R32(0x4000003C)
+
+#define TIM2_CH4CVR R32(0x40000040)
+
+#define TIM2_DMACFGR R32(0x40000048)
+
+#define TIM2_DMAADR R32(0x4000004C)
+
+#define WWDG_CTLR R32(0x40002C00)
+
+#define WWDG_CFGR R32(0x40002C04)
+
+#define WWDG_STATR R32(0x40002C08)
+
+#define IWDG_CTLR R32(0x40003000)
+
+#define IWDG_PSCR R32(0x40003004)
+
+#define IWDG_RLDR R32(0x40003008)
+
+#define IWDG_STATR R32(0x4000300C)
+
+#define I2C_CTLR1 R32(0x40005400)
+
+#define I2C_CTLR2 R32(0x40005404)
+
+#define I2C_OADDR1 R32(0x40005408)
+
+#define I2C_OADDR2 R32(0x4000540C)
+
+#define I2C_DATAR R32(0x40005410)
+
+#define I2C_STAR1 R32(0x40005414)
+
+#define I2C_STAR2 R32(0x40005418)
+
+#define I2C_CKCFGR R32(0x4000541C)
+
+#define PWR_CTLR R32(0x40007000)
+
+#define PWR_CSR R32(0x40007004)
+
+#define PWR_AWUCSR R32(0x40007008)
+
+#define PWR_AWUWR R32(0x4000700C)
+
+#define PWR_AWUPSC R32(0x40007010)
+
+#define AFIO_PCFR1 R32(0x40010004)
+
+#define AFIO_EXTICR R32(0x40010008)
+
+#define EXTI_INTENR R32(0x40010400)
+
+#define EXTI_EVENR R32(0x40010404)
+
+#define EXTI_RTENR R32(0x40010408)
+
+#define EXTI_FTENR R32(0x4001040C)
+
+#define EXTI_SWIEVR R32(0x40010410)
+
+#define EXTI_INTFR R32(0x40010414)
 
 #define GPIOA_CFGLR R32(0x40010800)
-#define GPIOB_CFGLR R32(0x40010c00)
-#define GPIOC_CFGLR R32(0x40011000)
-#define GPIOD_CFGLR R32(0x40011400)
-#define GPIOE_CFGLR R32(0x40011800)
-#define GPIOA_CFGHR R32(0x40010804)
-#define GPIOB_CFGHR R32(0x40010c04)
-#define GPIOC_CFGHR R32(0x40011004)
-#define GPIOD_CFGHR R32(0x40011404)
-#define GPIOE_CFGHR R32(0x40011804)
-typedef struct GPIOx_CFGLR_bits_s {
-  uint32_t MODE0 : 2;
-  uint32_t CNF0 : 2;
-  uint32_t MODE1 : 2;
-  uint32_t CNF1 : 2;
-  uint32_t MODE2 : 2;
-  uint32_t CNF2 : 2;
-  uint32_t MODE3 : 2;
-  uint32_t CNF3 : 2;
-  uint32_t MODE4 : 2;
-  uint32_t CNF4 : 2;
-  uint32_t MODE5 : 2;
-  uint32_t CNF5 : 2;
-  uint32_t MODE6 : 2;
-  uint32_t CNF6 : 2;
-  uint32_t MODE7 : 2;
-  uint32_t CNF7 : 2;
-} GPIOx_CFGLR_bits_t;
-typedef struct GPIOx_CFGHR_bits_s {
-  uint32_t MODE8 : 2;
-  uint32_t CNF8 : 2;
-  uint32_t MODE9 : 2;
-  uint32_t CNF9 : 2;
-  uint32_t MODE10 : 2;
-  uint32_t CNF10 : 2;
-  uint32_t MODE11 : 2;
-  uint32_t CNF11 : 2;
-  uint32_t MODE12 : 2;
-  uint32_t CNF12 : 2;
-  uint32_t MODE13 : 2;
-  uint32_t CNF13 : 2;
-  uint32_t MODE14 : 2;
-  uint32_t CNF14 : 2;
-  uint32_t MODE15 : 2;
-  uint32_t CNF15 : 2;
-} GPIOx_CFGHR_bits_t;
-#define GPIOA_CFGLR_bits (*((volatile GPIOx_CFGLR_bits_t *)&GPIOA_CFGLR))
-#define GPIOB_CFGLR_bits (*((volatile GPIOx_CFGLR_bits_t *)&GPIOB_CFGLR))
-#define GPIOC_CFGLR_bits (*((volatile GPIOx_CFGLR_bits_t *)&GPIOC_CFGLR))
-#define GPIOD_CFGLR_bits (*((volatile GPIOx_CFGLR_bits_t *)&GPIOD_CFGLR))
-#define GPIOE_CFGLR_bits (*((volatile GPIOx_CFGLR_bits_t *)&GPIOE_CFGLR))
-#define GPIOA_CFGHR_bits (*((volatile GPIOx_CFGHR_bits_t *)&GPIOA_CFGHR))
-#define GPIOB_CFGHR_bits (*((volatile GPIOx_CFGHR_bits_t *)&GPIOB_CFGHR))
-#define GPIOC_CFGHR_bits (*((volatile GPIOx_CFGHR_bits_t *)&GPIOC_CFGHR))
-#define GPIOD_CFGHR_bits (*((volatile GPIOx_CFGHR_bits_t *)&GPIOD_CFGHR))
-#define GPIOE_CFGHR_bits (*((volatile GPIOx_CFGHR_bits_t *)&GPIOE_CFGHR))
-enum GPIO_MODE {
-  GPIO_MODE_INPUT = 0,
-  GPIO_MODE_OUTPUT_10MHZ = 1,
-  GPIO_MODE_OUTPUT_2MHZ = 2,
-  GPIO_MODE_OUTPUT_50MHZ = 3,
-};
-enum GPIO_CNF_INPUT {
-  GPIO_CNF_INPUT_ANALOG = 0,
-  GPIO_CNF_INPUT_FLOATING = 1,
-  GPIO_CNF_INPUT_PU_RD_MODE = 2,
-};
-enum GPIO_CNF_OUTPUT {
-  GPIO_CNF_OUTPUT_PUSH_PULL = 0,
-  GPIO_CNF_OUTPUT_OPEN_DRAIN = 1,
-  GPIO_CNF_OUTPUT_FUNC_PUSH_PULL = 2,
-  GPIO_CNF_OUTPUT_FUNC_OPEN_DRAIN = 3,
-};
 
 #define GPIOA_INDR R32(0x40010808)
-#define GPIOB_INDR R32(0x40010c08)
-#define GPIOC_INDR R32(0x40011008)
-#define GPIOD_INDR R32(0x40011408)
-#define GPIOE_INDR R32(0x40011808)
-typedef struct GPIOx_INDR_bits_s {
-  uint32_t INDR0 : 1;
-  uint32_t INDR1 : 1;
-  uint32_t INDR2 : 1;
-  uint32_t INDR3 : 1;
-  uint32_t INDR4 : 1;
-  uint32_t INDR5 : 1;
-  uint32_t INDR6 : 1;
-  uint32_t INDR7 : 1;
-  uint32_t INDR8 : 1;
-  uint32_t INDR9 : 1;
-  uint32_t INDR10 : 1;
-  uint32_t INDR11 : 1;
-  uint32_t INDR12 : 1;
-  uint32_t INDR13 : 1;
-  uint32_t INDR14 : 1;
-  uint32_t INDR15 : 1;
-  uint32_t _r0 : 16;
-} GPIOx_INDR_bits_t;
-#define GPIOA_INDR_bits (*((volatile GPIOx_INDR_bits_t *)&GPIOA_INDR))
-#define GPIOB_INDR_bits (*((volatile GPIOx_INDR_bits_t *)&GPIOB_INDR))
-#define GPIOC_INDR_bits (*((volatile GPIOx_INDR_bits_t *)&GPIOC_INDR))
-#define GPIOD_INDR_bits (*((volatile GPIOx_INDR_bits_t *)&GPIOD_INDR))
-#define GPIOE_INDR_bits (*((volatile GPIOx_INDR_bits_t *)&GPIOE_INDR))
 
-#define GPIOA_OUTDR R32(0x4001080c)
-#define GPIOB_OUTDR R32(0x40010c0c)
-#define GPIOC_OUTDR R32(0x4001100c)
-#define GPIOD_OUTDR R32(0x4001140c)
-#define GPIOE_OUTDR R32(0x4001180c)
-typedef struct GPIOx_OUTDR_bits_s {
-  uint32_t ODR0 : 1;
-  uint32_t ODR1 : 1;
-  uint32_t ODR2 : 1;
-  uint32_t ODR3 : 1;
-  uint32_t ODR4 : 1;
-  uint32_t ODR5 : 1;
-  uint32_t ODR6 : 1;
-  uint32_t ODR7 : 1;
-  uint32_t ODR8 : 1;
-  uint32_t ODR9 : 1;
-  uint32_t ODR10 : 1;
-  uint32_t ODR11 : 1;
-  uint32_t ODR12 : 1;
-  uint32_t ODR13 : 1;
-  uint32_t ODR14 : 1;
-  uint32_t ODR15 : 1;
-  uint32_t _r0 : 16;
-} GPIOx_OUTDR_bits_t;
-#define GPIOA_OUTDR_bits (*((volatile GPIOx_OUTDR_bits_t *)&GPIOA_OUTDR))
-#define GPIOB_OUTDR_bits (*((volatile GPIOx_OUTDR_bits_t *)&GPIOB_OUTDR))
-#define GPIOC_OUTDR_bits (*((volatile GPIOx_OUTDR_bits_t *)&GPIOC_OUTDR))
-#define GPIOD_OUTDR_bits (*((volatile GPIOx_OUTDR_bits_t *)&GPIOD_OUTDR))
-#define GPIOE_OUTDR_bits (*((volatile GPIOx_OUTDR_bits_t *)&GPIOE_OUTDR))
+#define GPIOA_OUTDR R32(0x4001080C)
 
 #define GPIOA_BSHR R32(0x40010810)
-#define GPIOB_BSHR R32(0x40010c10)
-#define GPIOC_BSHR R32(0x40011010)
-#define GPIOD_BSHR R32(0x40011410)
-#define GPIOE_BSHR R32(0x40011810)
-typedef struct GPIOx_BSHR_bits_s {
-  uint32_t BS0 : 1;
-  uint32_t BS1 : 1;
-  uint32_t BS2 : 1;
-  uint32_t BS3 : 1;
-  uint32_t BS4 : 1;
-  uint32_t BS5 : 1;
-  uint32_t BS6 : 1;
-  uint32_t BS7 : 1;
-  uint32_t BS8 : 1;
-  uint32_t BS9 : 1;
-  uint32_t BS10 : 1;
-  uint32_t BS11 : 1;
-  uint32_t BS12 : 1;
-  uint32_t BS13 : 1;
-  uint32_t BS14 : 1;
-  uint32_t BS15 : 1;
-  uint32_t BR0 : 1;
-  uint32_t BR1 : 1;
-  uint32_t BR2 : 1;
-  uint32_t BR3 : 1;
-  uint32_t BR4 : 1;
-  uint32_t BR5 : 1;
-  uint32_t BR6 : 1;
-  uint32_t BR7 : 1;
-  uint32_t BR8 : 1;
-  uint32_t BR9 : 1;
-  uint32_t BR10 : 1;
-  uint32_t BR11 : 1;
-  uint32_t BR12 : 1;
-  uint32_t BR13 : 1;
-  uint32_t BR14 : 1;
-  uint32_t BR15 : 1;
-} GPIOx_BSHR_bits_t;
-#define GPIOA_BSHR_bits (*((volatile GPIOx_BSHR_bits_t *)&GPIOA_BSHR))
-#define GPIOB_BSHR_bits (*((volatile GPIOx_BSHR_bits_t *)&GPIOE_BSHR))
-#define GPIOC_BSHR_bits (*((volatile GPIOx_BSHR_bits_t *)&GPIOC_BSHR))
-#define GPIOD_BSHR_bits (*((volatile GPIOx_BSHR_bits_t *)&GPIOD_BSHR))
-#define GPIOE_BSHR_bits (*((volatile GPIOx_BSHR_bits_t *)&GPIOE_BSHR))
 
 #define GPIOA_BCR R32(0x40010814)
-#define GPIOB_BCR R32(0x40010c14)
-#define GPIOC_BCR R32(0x40011014)
-#define GPIOD_BCR R32(0x40011414)
-#define GPIOE_BCR R32(0x40011814)
-typedef struct GPIOx_BCR_bits_s {
-  uint32_t BR0 : 1;
-  uint32_t BR1 : 1;
-  uint32_t BR2 : 1;
-  uint32_t BR3 : 1;
-  uint32_t BR4 : 1;
-  uint32_t BR5 : 1;
-  uint32_t BR6 : 1;
-  uint32_t BR7 : 1;
-  uint32_t BR8 : 1;
-  uint32_t BR9 : 1;
-  uint32_t BR10 : 1;
-  uint32_t BR11 : 1;
-  uint32_t BR12 : 1;
-  uint32_t BR13 : 1;
-  uint32_t BR14 : 1;
-  uint32_t BR15 : 1;
-  uint32_t _r1 : 16;
-} GPIOx_BCR_bits_t;
-#define GPIOA_BCR_bits (*((volatile GPIOx_BCR_bits_t *)&GPIOA_BCR))
-#define GPIOB_BCR_bits (*((volatile GPIOx_BCR_bits_t *)&GPIOB_BCR))
-#define GPIOC_BCR_bits (*((volatile GPIOx_BCR_bits_t *)&GPIOC_BCR))
-#define GPIOD_BCR_bits (*((volatile GPIOx_BCR_bits_t *)&GPIOD_BCR))
-#define GPIOE_BCR_bits (*((volatile GPIOx_BCR_bits_t *)&GPIOE_BCR))
 
 #define GPIOA_LCKR R32(0x40010818)
-#define GPIOB_LCKR R32(0x40010c18)
+
+#define GPIOC_CFGLR R32(0x40011000)
+
+#define GPIOC_INDR R32(0x40011008)
+
+#define GPIOC_OUTDR R32(0x4001100C)
+
+#define GPIOC_BSHR R32(0x40011010)
+
+#define GPIOC_BCR R32(0x40011014)
+
 #define GPIOC_LCKR R32(0x40011018)
+
+#define GPIOD_CFGLR R32(0x40011400)
+
+#define GPIOD_INDR R32(0x40011408)
+
+#define GPIOD_OUTDR R32(0x4001140C)
+
+#define GPIOD_BSHR R32(0x40011410)
+
+#define GPIOD_BCR R32(0x40011414)
+
 #define GPIOD_LCKR R32(0x40011418)
-#define GPIOE_LCKR R32(0x40011818)
-typedef struct GPIOx_LCKR_bits_s {
-  uint32_t LCK0 : 1;
-  uint32_t LCK1 : 1;
-  uint32_t LCK2 : 1;
-  uint32_t LCK3 : 1;
-  uint32_t LCK4 : 1;
-  uint32_t LCK5 : 1;
-  uint32_t LCK6 : 1;
-  uint32_t LCK7 : 1;
-  uint32_t LCK8 : 1;
-  uint32_t LCK9 : 1;
-  uint32_t LCK10 : 1;
-  uint32_t LCK11 : 1;
-  uint32_t LCK12 : 1;
-  uint32_t LCK13 : 1;
-  uint32_t LCK14 : 1;
-  uint32_t LCK15 : 1;
-  uint32_t LCKK : 1;
-  uint32_t _r0 : 15;
-} GPIOx_LCKR_bits_t;
-#define GPIOA_LCKR_bits (*((volatile GPIOx_LCKR_bits_t *)&GPIOA_LCKR))
-#define GPIOB_LCKR_bits (*((volatile GPIOx_LCKR_bits_t *)&GPIOB_LCKR))
-#define GPIOC_LCKR_bits (*((volatile GPIOx_LCKR_bits_t *)&GPIOC_LCKR))
-#define GPIOD_LCKR_bits (*((volatile GPIOx_LCKR_bits_t *)&GPIOD_LCKR))
-#define GPIOE_LCKR_bits (*((volatile GPIOx_LCKR_bits_t *)&GPIOE_LCKR))
-// #############################################################
 
-// #############################################################
-// System counter @ 0xe000f000
-// #############################################################
-#define STK_CTLR R32(0xe000f000)
-typedef struct STK_CTLR_bits_s {
-  uint32_t STE : 1;
-  uint32_t STIE : 1;
-  uint32_t STCLK : 1;
-  uint32_t STRE : 1;
-  uint32_t MODE : 1;
-  uint32_t INIT : 1;
-  uint32_t _r0 : 25;
-  uint32_t SWIE : 1;
-} STK_CTLR_bits_t;
-#define STK_CTLR_bits (*((volatile STK_CTLR_bits_t *)&STK_CTLR))
+#define ADC_STATR R32(0x40012400)
 
-#define STK_SR R32(0xe000f004)
-typedef struct STK_SR_bits_s {
-  uint32_t CNTIF : 1;
-  uint32_t _r0 : 31;
-} STK_SR_bits_t;
-#define STK_SR_bits (*((volatile STK_SR_bits_t *)&STK_SR))
+#define ADC_CTLR1 R32(0x40012404)
 
-#define STK_CNTL R32(0xe000f008)
-#define STK_CNTH R32(0xe000f00c)
+#define ADC_CTLR2 R32(0x40012408)
 
-#define STK_CMPLR R32(0xe000f0010)
-#define STK_CMPHR R32(0xe000f0014)
-// #############################################################
+#define ADC_SAMPTR1 R32(0x4001240C)
 
+#define ADC_SAMPTR2 R32(0x40012410)
+
+#define ADC_IOFR1 R32(0x40012414)
+
+#define ADC_IOFR2 R32(0x40012418)
+
+#define ADC_IOFR3 R32(0x4001241C)
+
+#define ADC_IOFR4 R32(0x40012420)
+
+#define ADC_WDHTR R32(0x40012424)
+
+#define ADC_WDLTR R32(0x40012428)
+
+#define ADC_RSQR1 R32(0x4001242C)
+
+#define ADC_RSQR2 R32(0x40012430)
+
+#define ADC_RSQR3 R32(0x40012434)
+
+#define ADC_ISQR R32(0x40012438)
+
+#define ADC_IDATAR1 R32(0x4001243C)
+
+#define ADC_IDATAR2 R32(0x40012440)
+
+#define ADC_IDATAR3 R32(0x40012444)
+
+#define ADC_IDATAR4 R32(0x40012448)
+
+#define ADC_RDATAR R32(0x4001244C)
+
+#define ADC_DLYR R32(0x40012450)
+
+#define TIM1_CTLR1 R32(0x40012C00)
+
+#define TIM1_CTLR2 R32(0x40012C04)
+
+#define TIM1_SMCFGR R32(0x40012C08)
+
+#define TIM1_DMAINTENR R32(0x40012C0C)
+
+#define TIM1_INTFR R32(0x40012C10)
+
+#define TIM1_SWEVGR R32(0x40012C14)
+
+#define TIM1_CHCTLR1 R32(0x40012C18)
+
+#define TIM1_CHCTLR2 R32(0x40012C1C)
+
+#define TIM1_CCER R32(0x40012C20)
+
+#define TIM1_CNT R32(0x40012C24)
+
+#define TIM1_PSC R32(0x40012C28)
+
+#define TIM1_ATRLR R32(0x40012C2C)
+
+#define TIM1_RPTCR R32(0x40012C30)
+
+#define TIM1_CH1CVR R32(0x40012C34)
+
+#define TIM1_CH2CVR R32(0x40012C38)
+
+#define TIM1_CH3CVR R32(0x40012C3C)
+
+#define TIM1_CH4CVR R32(0x40012C40)
+
+#define TIM1_BDTR R32(0x40012C44)
+
+#define TIM1_DMACFGR R32(0x40012C48)
+
+#define TIM1_DMAADR R32(0x40012C4C)
+
+#define SPI_CTLR1 R32(0x40013000)
+
+#define SPI_CTLR2 R32(0x40013004)
+
+#define SPI_STATR R32(0x40013008)
+
+#define SPI_DATAR R32(0x4001300C)
+
+#define SPI_CRCR R32(0x40013010)
+
+#define SPI_RCRCR R32(0x40013014)
+
+#define SPI_TCRCR R32(0x40013018)
+
+#define SPI_HSCR R32(0x40013024)
+
+#define USART_STATR R32(0x40013800)
+
+#define USART_DATAR R32(0x40013804)
+
+#define USART_BRR R32(0x40013808)
+
+#define USART_CTLR1 R32(0x4001380C)
+
+#define USART_CTLR2 R32(0x40013810)
+
+#define USART_CTLR3 R32(0x40013814)
+
+#define USART_GPR R32(0x40013818)
+
+#define DMA_INTFR R32(0x40020000)
+
+#define DMA_INTFCR R32(0x40020004)
+
+#define DMA_CFGR1 R32(0x40020008)
+
+#define DMA_CNTR1 R32(0x4002000C)
+
+#define DMA_PADDR1 R32(0x40020010)
+
+#define DMA_MADDR1 R32(0x40020014)
+
+#define DMA_CFGR2 R32(0x4002001C)
+
+#define DMA_CNTR2 R32(0x40020020)
+
+#define DMA_PADDR2 R32(0x40020024)
+
+#define DMA_MADDR2 R32(0x40020028)
+
+#define DMA_CFGR3 R32(0x40020030)
+
+#define DMA_CNTR3 R32(0x40020034)
+
+#define DMA_PADDR3 R32(0x40020038)
+
+#define DMA_MADDR3 R32(0x4002003C)
+
+#define DMA_CFGR4 R32(0x40020044)
+
+#define DMA_CNTR4 R32(0x40020048)
+
+#define DMA_PADDR4 R32(0x4002004C)
+
+#define DMA_MADDR4 R32(0x40020050)
+
+#define DMA_CFGR5 R32(0x40020058)
+
+#define DMA_CNTR5 R32(0x4002005C)
+
+#define DMA_PADDR5 R32(0x40020060)
+
+#define DMA_MADDR5 R32(0x40020064)
+
+#define DMA_CFGR6 R32(0x4002006C)
+
+#define DMA_CNTR6 R32(0x40020070)
+
+#define DMA_PADDR6 R32(0x40020074)
+
+#define DMA_MADDR6 R32(0x40020078)
+
+#define DMA_CFGR7 R32(0x40020080)
+
+#define DMA_CNTR7 R32(0x40020084)
+
+#define DMA_PADDR7 R32(0x40020088)
+
+#define DMA_MADDR7 R32(0x4002008C)
+
+#define RCC_CTLR R32(0x40021000)
+
+#define RCC_CFGR0 R32(0x40021004)
+
+#define RCC_INTR R32(0x40021008)
+
+#define RCC_APB2PRSTR R32(0x4002100C)
+
+#define RCC_APB1PRSTR R32(0x40021010)
+
+#define RCC_AHBPCENR R32(0x40021014)
+
+#define RCC_APB2PCENR R32(0x40021018)
+
+#define RCC_APB1PCENR R32(0x4002101C)
+
+#define RCC_RSTSCKR R32(0x40021024)
+
+#define FLASH_ACTLR R32(0x40022000)
+
+#define FLASH_KEYR R32(0x40022004)
+
+#define FLASH_OBKEYR R32(0x40022008)
+
+#define FLASH_STATR R32(0x4002200C)
+
+#define FLASH_CTLR R32(0x40022010)
+
+#define FLASH_ADDR R32(0x40022014)
+
+#define FLASH_OBR R32(0x4002201C)
+
+#define FLASH_WPR R32(0x40022020)
+
+#define FLASH_MODEKEYR R32(0x40022024)
+
+#define FLASH_BOOT_MODEKEYR R32(0x40022028)
+
+#define EXTEN_CTR R32(0x40023800)
+
+#define PFIC_ISR1 R32(0xE000E000)
+
+#define PFIC_ISR2 R32(0xE000E004)
+
+#define PFIC_IPR1 R32(0xE000E020)
+
+#define PFIC_IPR2 R32(0xE000E024)
+
+#define PFIC_ITHRESDR R32(0xE000E040)
+
+#define PFIC_CFGR R32(0xE000E048)
+
+#define PFIC_GISR R32(0xE000E04C)
+
+#define PFIC_VTFIDR R32(0xE000E050)
+
+#define PFIC_VTFADDRR0 R32(0xE000E060)
+
+#define PFIC_VTFADDRR1 R32(0xE000E064)
+
+#define PFIC_IENR1 R32(0xE000E100)
+
+#define PFIC_IENR2 R32(0xE000E104)
+
+#define PFIC_IRER1 R32(0xE000E180)
+
+#define PFIC_IRER2 R32(0xE000E184)
+
+#define PFIC_IPSR1 R32(0xE000E200)
+
+#define PFIC_IPSR2 R32(0xE000E204)
+
+#define PFIC_IPRR1 R32(0xE000E280)
+
+#define PFIC_IPRR2 R32(0xE000E284)
+
+#define PFIC_IACTR1 R32(0xE000E300)
+
+#define PFIC_IACTR2 R32(0xE000E304)
+
+#define PFIC_IPRIORx R32(0xE000E400)
+
+#define PFIC_SCTLR R32(0xE000ED10)
+
+#define STK_CTLR R32(0xE000F000)
+
+#define STK_SR R32(0xE000F004)
+
+#define STK_CNTL R32(0xE000F008)
+
+#define STK_CMPLR R32(0xE000F010)
 #endif // __H_CH32V203

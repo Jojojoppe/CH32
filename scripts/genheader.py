@@ -10,6 +10,7 @@ registers = {}
 with open('registers/registers.csv', 'r') as f:
     reader = csv.DictReader(f, delimiter=',', skipinitialspace=True)
     for row in reader:
+        print(row)
         registers[int(row['address'], 16)] = row
 registers = dict(sorted(registers.items()))
 
@@ -19,6 +20,7 @@ for fname in files:
     with open(f'registers/{fname}', 'r') as f:
         reader = csv.DictReader(f, delimiter=',', skipinitialspace=True)
         for row in reader:
+            print(row)
             name = row['type']
             if name not in bits:
                 bits[name] = []
@@ -37,6 +39,7 @@ values = {}
 with open('registers/values.csv', 'r') as f:
     reader = csv.DictReader(f, delimiter=',', skipinitialspace=True)
     for row in reader:
+        print(row)
         name = row['type']
         if name not in values:
             values[name] = []

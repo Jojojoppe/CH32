@@ -23,7 +23,7 @@ typedef struct _GpioBankHandle {
   uint32_t lastValue;
 } GpioBankHandle;
 
-static GpioBankRegisters *gpioBankRegisters[] = {
+static volatile GpioBankRegisters *gpioBankRegisters[] = {
     (GpioBankRegisters *)&GPIOA_CFGLR_bits,
     (GpioBankRegisters *)&GPIOC_CFGLR_bits,
     (GpioBankRegisters *)&GPIOD_CFGLR_bits,
@@ -59,7 +59,7 @@ void gpioInit(GpioHandle *handle, GpioConfig *config, uint32_t bank,
 
 void gpioSetConfig(GpioHandle *handle, GpioConfig *config) {
   // Set pin modus
-  GpioBankRegisters *bh = gpioBankRegisters[handle->bank];
+  volatile GpioBankRegisters *bh = gpioBankRegisters[handle->bank];
   uint32_t mode = 0, conf = 0;
   uint32_t mask = 0xf << (4 * handle->pin);
   bool output = false;
@@ -139,7 +139,7 @@ void gpioSetConfig(GpioHandle *handle, GpioConfig *config) {
 }
 
 void gpioSetDigital(GpioHandle *handle, uint32_t value) {
-  GpioBankRegisters *bh = gpioBankRegisters[handle->bank];
+  volatile GpioBankRegisters *bh = gpioBankRegisters[handle->bank];
   if (value != 0) {
     bh->BSHR = 1 << handle->pin;
     bh->BSHR = 0;
@@ -150,6 +150,6 @@ void gpioSetDigital(GpioHandle *handle, uint32_t value) {
 }
 
 uint32_t gpiogetDigital(GpioHandle *handle){
-  GpioBankRegisters *bh = gpioBankRegisters[handle->bank];
+  volatile GpioBankRegisters *bh = gpioBankRegisters[handle->bank];
   return ((bh->INDR>>handle->pin)!=0) ? 1 : 0;
 }

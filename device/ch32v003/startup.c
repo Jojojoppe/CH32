@@ -1,4 +1,5 @@
 #include <ch32.h>
+#pragma optimize( "", off )
 
 #ifdef CPLUSPLUS
 // Method to call the C++ constructors
@@ -95,7 +96,8 @@ void DefaultIVT() {
 	");
 }
 
-void handle_reset() {
+void handle_reset() __attribute__((used, naked));
+void handle_reset(){
   asm volatile("\n\
 .option push\n\
 .option norelax\n\
@@ -183,3 +185,5 @@ void __libc_init_array(void) {
     __init_array_start[i]();
 }
 #endif
+
+#pragma optimize( "", on )

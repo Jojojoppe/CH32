@@ -1,5 +1,8 @@
 {
   "files.associations": {
     "ch32.h": "c"
-  }
+  },
+  "editor.tabSize": 2,
+  "editor.dropIntoEditor.enabled": true,
+  "editor.detectIndentation": false
 }

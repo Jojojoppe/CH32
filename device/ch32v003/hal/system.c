@@ -7,7 +7,7 @@
 #include <ch32.h>
 #include <hal/system.h>
 
-static uint32_t clockFrequency;
+static volatile uint32_t clockFrequency;
 
 void clockInit(enum ClockConfiguration clockConfiguration) {
   // Make sure to turn off PLL
@@ -29,8 +29,19 @@ void clockInit(enum ClockConfiguration clockConfiguration) {
     clockFrequency = 48000000;
     break;
   }
+
+  // Enable system clock
+  // TODO find better place
+  STK_CTLR_bits.STCLK = 1;
+  STK_CTLR_bits.STE = 1;
 }
 
 uint32_t getClockFrequency(){
   return clockFrequency;
+}
+
+void delayTick(uint32_t n) {
+  int32_t targend = STK_CNTL + n;
+  while ((int32_t)STK_CNTL - targend < 0)
+    ;
 }

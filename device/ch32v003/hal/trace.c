@@ -11,7 +11,7 @@
 // For debug writing to the debug interface.
 #define DMDATA0 ((volatile uint32_t *)0xe00000f4)
 #define DMDATA1 ((volatile uint32_t *)0xe00000f8)
-#define FUNCONF_DEBUGPRINTF_TIMEOUT (1<<31) // Wait for a very very long time.
+#define FUNCONF_DEBUGPRINTF_TIMEOUT (1 << 31) // Wait for a very very long time.
 
 void handle_debug_input(int numbytes, uint8_t *data) __attribute__((weak));
 void handle_debug_input(int numbytes, uint8_t *data) {}
@@ -65,24 +65,24 @@ int tracePutChar(int c) {
   return 1;
 }
 
-int tracePut(const char * str){
+int tracePut(const char *str) {
   uint32_t i = 0;
-  while(str[i]!=0){
+  while (str[i] != 0) {
     tracePutChar(str[i]);
     i++;
   }
   return i;
 }
 
-int traceBinary(int val, int bits){
+int traceBinary(int val, int bits) {
   int j = tracePut("0b");
-  for(int i=bits-1; i>=0; i--){
-    if(((val>>i)&1)!=0){
+  for (int i = bits - 1; i >= 0; i--) {
+    if (((val >> i) & 1) != 0) {
       j += tracePutChar('1');
-    }else{
+    } else {
       j += tracePutChar('0');
     }
-    if((i%4)==0){
+    if ((i % 4) == 0) {
       j += tracePutChar(' ');
     }
   }

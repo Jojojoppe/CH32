@@ -33,5 +33,11 @@ void clockInit(enum ClockConfiguration clockConfiguration);
  */
 uint32_t getClockFrequency();
 
+/**
+ * @brief Wait for N ticks of the system clock
+ * 
+ * @param n number of system clock ticks to wait
+ */
+void delayTick(uint32_t n);
 
 #endif // __H_HAL_SYSTEM

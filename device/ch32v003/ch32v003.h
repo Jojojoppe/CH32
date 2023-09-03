@@ -27,6 +27,12 @@ enum GPIO_CNF_INPUT {
   GPIO_CNF_INPUT_PULL_UP_DOWN = 3,
 };
 
+enum GPIO_BANK {
+  GPIO_BANK_A = 0,
+  GPIO_BANK_C = 1,
+  GPIO_BANK_D = 2,
+};
+
 enum INTERRUPT {
   INTERRUPT_NMI = 2,
   INTERRUPT_HardFault = 3,
@@ -261,6 +267,18 @@ typedef struct GPIOx_BSHR_bits_s {
 #define GPIOA_BSHR_bits (*((volatile GPIOx_BSHR_bits_t *)&GPIOA_BSHR))
 
 #define GPIOA_BCR R32(0x40010814)
+typedef struct GPIOx_BCR_bits_s {
+  uint32_t BR0 : 1;
+  uint32_t BR1 : 1;
+  uint32_t BR2 : 1;
+  uint32_t BR3 : 1;
+  uint32_t BR4 : 1;
+  uint32_t BR5 : 1;
+  uint32_t BR6 : 1;
+  uint32_t BR7 : 1;
+  uint32_t _r0 : 24;
+} GPIOx_BCR_bits_t;
+#define GPIOA_BCR_bits (*((volatile GPIOx_BCR_bits_t *)&GPIOA_BCR))
 
 #define GPIOA_LCKR R32(0x40010818)
 typedef struct GPIOx_LCKR_bits_s {
@@ -290,6 +308,7 @@ typedef struct GPIOx_LCKR_bits_s {
 #define GPIOC_BSHR_bits (*((volatile GPIOx_BSHR_bits_t *)&GPIOC_BSHR))
 
 #define GPIOC_BCR R32(0x40011014)
+#define GPIOC_BCR_bits (*((volatile GPIOx_BCR_bits_t *)&GPIOC_BCR))
 
 #define GPIOC_LCKR R32(0x40011018)
 #define GPIOC_LCKR_bits (*((volatile GPIOx_LCKR_bits_t *)&GPIOC_LCKR))
@@ -307,6 +326,7 @@ typedef struct GPIOx_LCKR_bits_s {
 #define GPIOD_BSHR_bits (*((volatile GPIOx_BSHR_bits_t *)&GPIOD_BSHR))
 
 #define GPIOD_BCR R32(0x40011414)
+#define GPIOD_BCR_bits (*((volatile GPIOx_BCR_bits_t *)&GPIOD_BCR))
 
 #define GPIOD_LCKR R32(0x40011418)
 #define GPIOD_LCKR_bits (*((volatile GPIOx_LCKR_bits_t *)&GPIOD_LCKR))

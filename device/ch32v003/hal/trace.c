@@ -64,3 +64,27 @@ int tracePutChar(int c) {
   *DMDATA0 = 0x85 | ((const char)c << 8);
   return 1;
 }
+
+int tracePut(const char * str){
+  uint32_t i = 0;
+  while(str[i]!=0){
+    tracePutChar(str[i]);
+    i++;
+  }
+  return i;
+}
+
+int traceBinary(int val, int bits){
+  int j = tracePut("0b");
+  for(int i=bits-1; i>=0; i--){
+    if(((val>>i)&1)!=0){
+      j += tracePutChar('1');
+    }else{
+      j += tracePutChar('0');
+    }
+    if((i%4)==0){
+      j += tracePutChar(' ');
+    }
+  }
+  return j;
+}

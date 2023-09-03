@@ -12,5 +12,7 @@ void traceInit();
 void traceWaitForDebugger();
 
 int tracePutChar(int c);
+int tracePut(const char * str);
+int traceBinary(int val, int bits);
 
 #endif //__H_HAL_TRACE

@@ -95,6 +95,11 @@ term: $(CH32ROOT)/extern/ch32v003fun/minichlink/minichlink
 	echo ' >> term'
 	-$(CH32ROOT)/extern/ch32v003fun/minichlink/minichlink -w $(DISTDIR)/last.bin flash -b -T 9600
 
+.PHONY: unbrick
+unbrick: $(CH32ROOT)/extern/ch32v003fun/minichlink/minichlink
+	echo ' >> unbrick'
+	-$(CH32ROOT)/extern/ch32v003fun/minichlink/minichlink -u
+
 .PHONY: header
 header:
 	echo ' >> header'

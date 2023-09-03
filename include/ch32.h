@@ -8,6 +8,8 @@
 #define __H_CH32
 
 #include <stdint.h>
+#include <stddef.h>
+#include <stdbool.h>
 
 #define R64(address) (*((uint64_t*)address))
 #define R32(address) (*((uint32_t*)address))

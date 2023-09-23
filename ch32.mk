@@ -13,7 +13,7 @@ ifeq "$(DEBUG)" ""
 	BUILDDIR		:= $(BUILDDIR_BASE)/release
 	DISTDIR			:= $(DISTDIR_BASE)/release
 else
-	CFLAGS 			+= -g
+	CFLAGS 			+= -g -D__DEBUG
 	BUILDDIR		:= $(BUILDDIR_BASE)/debug
 	DISTDIR			:= $(DISTDIR_BASE)/debug
 endif
@@ -66,39 +66,40 @@ clean:
 	echo ' >> clean'
 	-rm -rf $(BUILDDIR_BASE) $(DISTDIR_BASE)
 
-$(CH32ROOT)/extern/ch32v003fun/minichlink/minichlink:
-	cd $(CH32ROOT)/extern/ch32v003fun/minichlink && \
-		${MAKE} ${MFLAGS} minichlink
+.PHONY: mchlink
+mchlink:
+	echo ' >> make mchlink'
+	cd $(CH32ROOT)/minichlink && make
 
 .PHONY: flash
-flash: $(CH32ROOT)/extern/ch32v003fun/minichlink/minichlink
+flash: mchlink
 	echo ' >> flash'
-	-$(CH32ROOT)/extern/ch32v003fun/minichlink/minichlink -w $(DISTDIR)/last.bin flash -b
+	-$(CH32ROOT)/minichlink/mchlink -w $(DISTDIR)/last.bin flash -b
 
 .PHONY: flash_bootloader
-flash_bootloader: $(CH32ROOT)/extern/ch32v003fun/minichlink/minichlink
+flash_bootloader: mchlink
 	echo ' >> flash_bootloader'
-	-$(CH32ROOT)/extern/ch32v003fun/minichlink/minichlink -a -U -w $(DISTDIR)/last.bin bootloader -B
+	-$(CH32ROOT)/minichlink/mchlink -a -U -w $(DISTDIR)/last.bin bootloader -B
 
 .PHONY: reset
-reset: $(CH32ROOT)/extern/ch32v003fun/minichlink/minichlink
+reset: mchlink
 	echo ' >> reset'
-	-$(CH32ROOT)/extern/ch32v003fun/minichlink/minichlink -b
+	-$(CH32ROOT)/minichlink/mchlink -b
 
 .PHONY: debug
-debug: $(CH32ROOT)/extern/ch32v003fun/minichlink/minichlink
+debug: mchlink
 	echo ' >> debug @localhost:2000'
-	-$(CH32ROOT)/extern/ch32v003fun/minichlink/minichlink -w $(DISTDIR)/last.bin flash -b -G
+	-$(CH32ROOT)/minichlink/mchlink -w $(DISTDIR)/last.bin flash -b -A -G
 
 .PHONY: term
-term: $(CH32ROOT)/extern/ch32v003fun/minichlink/minichlink
+term: mchlink
 	echo ' >> term'
-	-$(CH32ROOT)/extern/ch32v003fun/minichlink/minichlink -w $(DISTDIR)/last.bin flash -b -T 9600
+	-$(CH32ROOT)/minichlink/mchlink -w $(DISTDIR)/last.bin flash -b -T 9600
 
 .PHONY: unbrick
-unbrick: $(CH32ROOT)/extern/ch32v003fun/minichlink/minichlink
+unbrick: mchlink
 	echo ' >> unbrick'
-	-$(CH32ROOT)/extern/ch32v003fun/minichlink/minichlink -u
+	-$(CH32ROOT)/minichlink/mchlink -u
 
 .PHONY: header
 header:

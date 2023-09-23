@@ -1,0 +1,34 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "GDB ch32v003 - blinky",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceRoot}/examples/blinky/dist/debug/blinky/blinky.elf",
+      "args": [],
+      "stopAtEntry": false,
+      "cwd": "${workspaceRoot}/examples/blinky",
+      "externalConsole": false,
+      "MIMode": "gdb",
+      "preLaunchTask": "build_debug_blinky_ch32v003",
+      "deploySteps": [
+        {
+          "type": "shell",
+          "continueOn": "GDBServer",
+          "command": "make --directory=${workspaceRoot}/examples/blinky debug"
+        },
+      ],
+      "setupCommands": [
+        {
+          "description": "Enable pretty-printing for gdb",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": false
+        },
+      ],
+      "miDebuggerPath": "gdb-multiarch",
+      "miDebuggerServerAddress": "127.0.0.1:2000",
+      "internalConsoleOptions": "neverOpen",
+    }
+  ]
+}

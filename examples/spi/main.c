@@ -8,12 +8,6 @@
 int main() {
   clockInit(CLOCK_CONFIG_DEFAULT);
 
-#if defined(__DEBUG) && defined(CH32V003)
-  traceInit();
-  traceWaitForDebugger();
-  tracePut("Hello World!\r\n");
-#endif
-
   GpioHandle led;
   GpioConfig ledConfig = {
       .interruptMode = GPIO_INTERRUPT_NONE,

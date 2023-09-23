@@ -32,6 +32,7 @@ void clockInit(enum ClockConfiguration clockConfiguration) {
 
   // Enable system clock
   // TODO find better place
+  STK_CTLR = 0;
   STK_CTLR_bits.STCLK = 1;
   STK_CTLR_bits.STE = 1;
 }

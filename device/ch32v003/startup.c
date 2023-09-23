@@ -1,5 +1,5 @@
 #include <ch32.h>
-#pragma optimize( "", off )
+#pragma optimize("", off)
 
 #ifdef CPLUSPLUS
 // Method to call the C++ constructors
@@ -13,7 +13,7 @@ int main() __attribute__((used));
 void _DefaultIRQ_Handler(void) __attribute__((section(".text.vector_handler")));
 void _DefaultIRQ_Handler(void) { asm volatile("1: j 1b"); }
 #define DEFINTERRUPT(x)                                                        \
-  void _##x##_Handler(void) __attribute__((section(".text.vector_handler")))       \
+  void _##x##_Handler(void) __attribute__((section(".text.vector_handler")))   \
   __attribute__((weak, alias("_DefaultIRQ_Handler"))) __attribute__((used))
 
 // All interrupt handlers point to the default IRQ handler
@@ -97,7 +97,7 @@ void DefaultIVT() {
 }
 
 void handle_reset() __attribute__((used, naked));
-void handle_reset(){
+void handle_reset() {
   asm volatile("\n\
 .option push\n\
 .option norelax\n\
@@ -186,4 +186,4 @@ void __libc_init_array(void) {
 }
 #endif
 
-#pragma optimize( "", on )
+#pragma optimize("", on)

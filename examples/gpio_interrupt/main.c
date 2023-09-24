@@ -42,8 +42,6 @@ int main() {
   gpioInit(&input, &inputConfig, PIN_INPUT);
   gpioRegisterInterruptCallback(&input, inputInterrupt, (void *)&led);
 
-  // asm volatile("nop");
-
   for (;;) {
     if (counter > 0) {
       while (counter) {

@@ -28,7 +28,7 @@ static GpioBankRegisters *gpioBankRegisters[] = {
 
 #ifdef GPIO_USE_INTERRUPTS
 static GpioHandle *interruptHandles[8U] = {NULL};
-#endif;
+#endif
 
 void gpioInit(GpioHandle *handle, GpioConfig *config, uint32_t bank,
               uint32_t pin) {

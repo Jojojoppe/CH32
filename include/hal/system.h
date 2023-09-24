@@ -2,7 +2,7 @@
  * @file system.h
  * @author Joppe Blondel
  * @date 2023-07-10
- * @brief 
+ * @brief Basic system functions
  */
 #ifndef __H_HAL_SYSTEM
 #define __H_HAL_SYSTEM

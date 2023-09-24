@@ -1,17 +1,20 @@
 {
     "configurations": [
         {
-            "name": "basic",
+            "name": "Linux",
             "includePath": [
                 "${workspaceFolder}/include",
                 "${workspaceFolder}/device/ch32v003",
             ],
             "defines": [
-                "CH32V003"
+              "CH32V003",
+              "__DEBUG",
+              "GPIO_USE_INTERRUPTS"
             ],
+            "compilerPath": "/usr/bin/clang",
             "cStandard": "c17",
-            "cppStandard": "gnu++14",
-            "intelliSenseMode": "windows-gcc-x64"
+            "cppStandard": "c++17",
+            "intelliSenseMode": "linux-clang-x64"
         }
     ],
     "version": 4

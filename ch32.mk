@@ -1,9 +1,9 @@
 .SILENT:
 
-DEVICE 				?= ch32v203
+DEVICE 				?= ch32v003
 PART					?= g6
 DEBUG					?=
-PREFIX					?= riscv64-elf
+PREFIX				?= riscv64-elf
 
 include $(CH32ROOT)/device/$(DEVICE)/makefile.mk
 
@@ -13,7 +13,7 @@ ifeq "$(DEBUG)" ""
 	BUILDDIR		:= $(BUILDDIR_BASE)/release
 	DISTDIR			:= $(DISTDIR_BASE)/release
 else
-	CFLAGS 			+= -g -D__DEBUG
+	CFLAGS 			+= -g -D__DEBUG -Og
 	BUILDDIR		:= $(BUILDDIR_BASE)/debug
 	DISTDIR			:= $(DISTDIR_BASE)/debug
 endif
@@ -36,7 +36,7 @@ OBJCOPY 			:= $(PREFIX)-objcopy
 OBJDUMP 			:= $(PREFIX)-objdump
 
 CFLAGS				+= -I. -I$(CH32ROOT)/include -I$(CH32ROOT)/device/$(DEVICE)
-LDFLAGS				+= -Wl,--print-memory-usage
+LDFLAGS				+= -Wl,--print-memory-usage -L$(CH32ROOT)/misc/libgcc
 
 # Add DEPFILE dependencies
 -include $(DEPFILES)

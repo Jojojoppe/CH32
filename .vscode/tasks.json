@@ -11,6 +11,17 @@
           "DEVICE": "ch32v003"
         },
       },
+    },
+    {
+      "label": "build_debug_gpio_interrupt_ch32v003",
+      "type": "shell",
+      "command": "make DEBUG=true clean all mchlink",
+      "options": {
+        "cwd": "${workspaceRoot}/examples/gpio_interrupt",
+        "env": {
+          "DEVICE": "ch32v003"
+        },
+      },
     }
   ]
 }

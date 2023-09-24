@@ -16,7 +16,36 @@
         {
           "type": "shell",
           "continueOn": "GDBServer",
-          "command": "make --directory=${workspaceRoot}/examples/blinky debug"
+          "command": "make DEBUG=true --directory=${workspaceRoot}/examples/blinky debug"
+        },
+      ],
+      "setupCommands": [
+        {
+          "description": "Enable pretty-printing for gdb",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": false
+        },
+      ],
+      "miDebuggerPath": "gdb-multiarch",
+      "miDebuggerServerAddress": "127.0.0.1:2000",
+      "internalConsoleOptions": "neverOpen",
+    },
+    {
+      "name": "GDB ch32v003 - gpio_interrupt",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceRoot}/examples/gpio_interrupt/dist/debug/gpio_interrupt/gpio_interrupt.elf",
+      "args": [],
+      "stopAtEntry": false,
+      "cwd": "${workspaceRoot}/examples/gpio_interrupt",
+      "externalConsole": false,
+      "MIMode": "gdb",
+      "preLaunchTask": "build_debug_gpio_interrupt_ch32v003",
+      "deploySteps": [
+        {
+          "type": "shell",
+          "continueOn": "GDBServer",
+          "command": "make DEBUG=true --directory=${workspaceRoot}/examples/gpio_interrupt debug"
         },
       ],
       "setupCommands": [

@@ -10,7 +10,8 @@ void __libc_init_array(void);
 int main() __attribute__((used));
 
 // If you don't override a specific handler, it will just spin forever.
-void _DefaultIRQ_Handler(void) __attribute__((section(".text.vector_handler")));
+void _DefaultIRQ_Handler(void) __attribute__((section(".text.vector_handler")))
+__attribute__((interrupt));
 void _DefaultIRQ_Handler(void) { asm volatile("1: j 1b"); }
 #define DEFINTERRUPT(x)                                                        \
   void _##x##_Handler(void) __attribute__((section(".text.vector_handler")))   \

@@ -24,9 +24,15 @@ int main() {
   gpioInit(&led, &ledConfig, PIN_LED);
 
   for (;;) {
-    delayTick(getClockFrequency() / 4);
+    delayTick(getClockFrequency());
+#if defined(__DEBUG) && defined(CH32V003)
+    tracePut("On\n");
+#endif
     gpioSetDigital(&led, 1);
-    delayTick(getClockFrequency() / 4);
+    delayTick(getClockFrequency());
+#if defined(__DEBUG) && defined(CH32V003)
+    tracePut("Off\n");
+#endif
     gpioSetDigital(&led, 0);
   }
 

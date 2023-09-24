@@ -43,15 +43,24 @@ typedef struct GpioConfig {
   bool alternateFunction;
 } GpioConfig;
 
-typedef struct GpioHandle {
+typedef struct GpioHandle GpioHandle;
+
+typedef void (*GpioInterruptCallback)(GpioHandle *handle, void *userData);
+
+struct GpioHandle {
   uint32_t bank;
   uint32_t pin;
-  struct GpioHandle *next;
-} GpioHandle;
+  GpioHandle *next;
+  GpioInterruptCallback callback;
+  void *userData;
+};
 
 void gpioInit(GpioHandle *handle, GpioConfig *config, uint32_t bank,
               uint32_t pin);
 void gpioSetConfig(GpioHandle *handle, GpioConfig *config);
+void gpioRegisterInterruptCallback(GpioHandle volatile *handle,
+                                   GpioInterruptCallback callback,
+                                   void *userData);
 void gpioSetDigital(GpioHandle *handle, uint32_t value);
 uint32_t gpiogetDigital(GpioHandle *handle);
 

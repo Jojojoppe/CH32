@@ -712,7 +712,7 @@ int MicroGDBPollServer(void *dev) {
         close(serverSocket);
       serverSocket = 0;
       listenMode = 1;
-      GDBListen(dev);
+      return -1;
     }
   }
   if (allpolls[0].revents & POLLIN) {
@@ -739,7 +739,7 @@ int MicroGDBPollServer(void *dev) {
         close(serverSocket);
         serverSocket = 0;
         listenMode = 1;
-        GDBListen(dev);
+        return -1;
       } else if (MicroGDBStubHandleClientData(dev, buffer, (int)rx)) {
         MicroGDBStubHandleDisconnect(dev);
         if (serverSocket)

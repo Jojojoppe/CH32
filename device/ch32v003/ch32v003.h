@@ -217,29 +217,29 @@ typedef struct GPIOx_CFGLR_bits_s {
 
 #define GPIOA_INDR R32(0x40010808)
 typedef struct GPIOx_INDR_bits_s {
-  uint32_t IDR0 : 1;
-  uint32_t IDR1 : 1;
-  uint32_t IDR2 : 1;
-  uint32_t IDR3 : 1;
-  uint32_t IDR4 : 1;
-  uint32_t IDR5 : 1;
-  uint32_t IDR6 : 1;
-  uint32_t IDR7 : 1;
-  uint32_t _r0 : 24;
+  uint16_t IDR0 : 1;
+  uint16_t IDR1 : 1;
+  uint16_t IDR2 : 1;
+  uint16_t IDR3 : 1;
+  uint16_t IDR4 : 1;
+  uint16_t IDR5 : 1;
+  uint16_t IDR6 : 1;
+  uint16_t IDR7 : 1;
+  uint16_t _r0 : 8;
 } GPIOx_INDR_bits_t;
 #define GPIOA_INDR_bits (*((volatile GPIOx_INDR_bits_t *)&GPIOA_INDR))
 
 #define GPIOA_OUTDR R32(0x4001080C)
 typedef struct GPIOx_OUTDR_bits_s {
-  uint32_t ODR0 : 1;
-  uint32_t ODR1 : 1;
-  uint32_t ODR2 : 1;
-  uint32_t ODR3 : 1;
-  uint32_t ODR4 : 1;
-  uint32_t ODR5 : 1;
-  uint32_t ODR6 : 1;
-  uint32_t ODR7 : 1;
-  uint32_t _r0 : 24;
+  uint16_t ODR0 : 1;
+  uint16_t ODR1 : 1;
+  uint16_t ODR2 : 1;
+  uint16_t ODR3 : 1;
+  uint16_t ODR4 : 1;
+  uint16_t ODR5 : 1;
+  uint16_t ODR6 : 1;
+  uint16_t ODR7 : 1;
+  uint16_t _r0 : 8;
 } GPIOx_OUTDR_bits_t;
 #define GPIOA_OUTDR_bits (*((volatile GPIOx_OUTDR_bits_t *)&GPIOA_OUTDR))
 
@@ -268,15 +268,15 @@ typedef struct GPIOx_BSHR_bits_s {
 
 #define GPIOA_BCR R32(0x40010814)
 typedef struct GPIOx_BCR_bits_s {
-  uint32_t BR0 : 1;
-  uint32_t BR1 : 1;
-  uint32_t BR2 : 1;
-  uint32_t BR3 : 1;
-  uint32_t BR4 : 1;
-  uint32_t BR5 : 1;
-  uint32_t BR6 : 1;
-  uint32_t BR7 : 1;
-  uint32_t _r0 : 24;
+  uint16_t BR0 : 1;
+  uint16_t BR1 : 1;
+  uint16_t BR2 : 1;
+  uint16_t BR3 : 1;
+  uint16_t BR4 : 1;
+  uint16_t BR5 : 1;
+  uint16_t BR6 : 1;
+  uint16_t BR7 : 1;
+  uint16_t _r0 : 8;
 } GPIOx_BCR_bits_t;
 #define GPIOA_BCR_bits (*((volatile GPIOx_BCR_bits_t *)&GPIOA_BCR))
 

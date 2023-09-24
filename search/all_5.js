@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['mode_35',['mode',['../structGpioConfig.html#a42eb591b28c6a6083607b59d87d0bca1',1,'GpioConfig']]]
+  ['mode_36',['mode',['../structGpioConfig.html#a42eb591b28c6a6083607b59d87d0bca1',1,'GpioConfig']]]
 ];

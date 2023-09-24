@@ -1,6 +1,8 @@
 # minichlink
 
 !!! [Original source](https://github.com/cnlohr/ch32v003fun/tree/master/minichlink)
+Some minor changes are applied to work better with the VSCode debugger. MIT Licenced by
+CNLohr.
 
 A free, open mechanism to use the CH-LinkE $4 programming dongle for the CH32V003.
 

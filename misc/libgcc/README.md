@@ -1,5 +1,7 @@
 # Supplementary non-official material
 
+!!! [Original source](https://github.com/cnlohr/ch32v003fun/tree/master/misc)
+
 This is a copy of libgcc.a that I know works well with the part. Below are the instructions on how to get the source code and how to build it.
 
 # Extra totally non-official info

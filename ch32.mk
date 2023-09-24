@@ -69,37 +69,37 @@ clean:
 .PHONY: mchlink
 mchlink:
 	echo ' >> make mchlink'
-	cd $(CH32ROOT)/minichlink && make
+	cd $(CH32ROOT)/misc/minichlink && make
 
 .PHONY: flash
 flash: mchlink
 	echo ' >> flash'
-	-$(CH32ROOT)/minichlink/mchlink -w $(DISTDIR)/last.bin flash -b
+	-$(CH32ROOT)/misc/minichlink/mchlink -w $(DISTDIR)/last.bin flash -b
 
 .PHONY: flash_bootloader
 flash_bootloader: mchlink
 	echo ' >> flash_bootloader'
-	-$(CH32ROOT)/minichlink/mchlink -a -U -w $(DISTDIR)/last.bin bootloader -B
+	-$(CH32ROOT)/misc/minichlink/mchlink -a -U -w $(DISTDIR)/last.bin bootloader -B
 
 .PHONY: reset
 reset: mchlink
 	echo ' >> reset'
-	-$(CH32ROOT)/minichlink/mchlink -b
+	-$(CH32ROOT)/misc/minichlink/mchlink -b
 
 .PHONY: debug
 debug: mchlink
 	echo ' >> debug @localhost:2000'
-	-$(CH32ROOT)/minichlink/mchlink -w $(DISTDIR)/last.bin flash -b -A -G
+	-$(CH32ROOT)/misc/minichlink/mchlink -w $(DISTDIR)/last.bin flash -b -A -G
 
 .PHONY: term
 term: mchlink
 	echo ' >> term'
-	-$(CH32ROOT)/minichlink/mchlink -w $(DISTDIR)/last.bin flash -b -T 9600
+	-$(CH32ROOT)/misc/minichlink/mchlink -w $(DISTDIR)/last.bin flash -b -T 9600
 
 .PHONY: unbrick
 unbrick: mchlink
 	echo ' >> unbrick'
-	-$(CH32ROOT)/minichlink/mchlink -u
+	-$(CH32ROOT)/misc/minichlink/mchlink -u
 
 .PHONY: header
 header:
